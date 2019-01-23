@@ -9,6 +9,7 @@ import {
 import Signin from "./Signin";
 import Signup from "./Signup";
 import Game from "./Game";
+import Jouer from "./Jouer";
 
 import "./App.css";
 
