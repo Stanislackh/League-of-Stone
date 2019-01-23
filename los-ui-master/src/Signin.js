@@ -60,7 +60,7 @@ class Signin extends Component {
                 placeholder = "Entrez votre Login"
                 value={this.state.email}
                 onChange={this.handleChangeEmail}
-              /><br />
+              />
             </label>
           </div>
           <div>
