@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { SERVER_URL } from "./consts";
-
+import "./signup.css";
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -60,48 +60,51 @@ class Signup extends Component {
   }
   render() {
     return (
-      <div>
+      <div id="acc">
+        <header>
+          <h1>League of Stones</h1>
+          <h3>Version UT2J</h3>
+        </header>
         <form onSubmit={this.handleSubmit}>
           <div>{this.state.error}</div>
-          Inscrivez-vous :
+          <div id="text">Inscrivez-vous :</div>
           <label>
-            Pseudo :{" "}
-            <input
+            <input id="pwd"
+              placeholder = "Pseudo"
               type="text"
               value={this.state.login}
               onChange={this.handleChangeLogin}
             />
           </label>
           <label>
-            Email :{" "}
-            <input
+            <input id="pwd"
+              placeholder = "E-mail"
               type="text"
               value={this.state.email}
               onChange={this.handleChangeEmail}
             />
           </label>
           <label>
-            Mot de passe :{" "}
-            <input
+            <input id="pwd"
+              placeholder = "Mot de passe"
               type="password"
               value={this.state.password}
               onChange={this.handleChangePassword}
             />
           </label>
           <label>
-            Confirmation du mot de passe :{" "}
-            <input
+            <input id="pwd"
+              placeholder = "Confirmer mot de passe"
               type="password"
               value={this.state.confirmPassword}
               onChange={this.handleChangeConfirmPassword}
             />
           </label>
-          <input type="submit" value="S'inscrire" />
+          <div id="val">
+            <input type="submit" value="S'inscrire" />
+            <Link to="/signin"><input id="bout" type="submit" value="Se connecter" /></Link>
+          </div>      
         </form>
-        <div>
-          {"Vous avez déjà un compte ? "}
-          <Link to="/signin">Connectez-vous ici !</Link>
-        </div>
       </div>
     );
   }
