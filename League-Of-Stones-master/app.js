@@ -45,7 +45,7 @@ function initApp(losDB) {
   app.use(cors());
 
   app.get('/', function(req, res) {
-    tools.sendData(res, 'Hello World ! ', req);
+    tools.sendData(res, 'Chocobo! ', req);
   });
 
   users.init(app, tools, losDB);
@@ -53,7 +53,7 @@ function initApp(losDB) {
   cards.init(app, tools, losDB);
   match.init(app, tools, losDB, cards);
 
-  var serverPort = 3000;
+  var serverPort = 3001;
   app.listen(serverPort, function() {
     console.log('server up and running at %s port', serverPort);
   });
