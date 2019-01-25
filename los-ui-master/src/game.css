@@ -1,0 +1,80 @@
+#accueil{
+    margin-left : 50px;
+    margin-top : 20px;
+    width : 300px;
+
+}
+#logo{
+    margin-right:10px;
+    margin-left:10px;
+    width:280px;
+    height:70px;
+}
+#regle{
+    background-image: url("fond.jpeg");
+    margin-top:30px;
+    border : solid;
+    border-color : #303036;
+    border-radius : 35px;
+    border-width : 5px;
+    width : 300px;
+    text-align : center;
+}
+#actions{
+    margin-top : 0px;
+}
+.bla{
+    margin-left : 20px;
+    margin-top : 15px;
+    margin-bottom : 15px;
+    width : 260px;
+    text-align : center;
+    display: block;
+    height : 50px;
+    color : #db3333;
+    background-color : transparent;
+    border-color:#dd2e2e;
+    border-radius : 8px;
+    font-size : 20px;
+    font-weight:bold;
+}
+#ecart{
+    margin-top:15px;
+    margin-bottom:15px;
+    margin-left:10px;
+    margin-right:10px;
+}
+#pla{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.bla:hover{
+    background-color : #db3333;
+    color : white;
+}
+#milieu{
+    width : 300px;
+    margin-top : 30px;
+    border : solid;
+    border-color : #303036;
+    border-radius : 35px;
+    border-width : 5px;
+    background-image: url("fond.jpeg");
+}
+header{
+    background-image: url("fond.jpeg");
+    border : solid;
+    border-color : #303036;
+    border-radius : 35px;
+    border-width : 5px;
+    width : 300px;
+}
+h1{
+    margin-left : 10px;
+    margin-top : 10px;
+    margin-right : 10px;
+    text-align : center;
+}
+h3{
+    text-align : center;
+}

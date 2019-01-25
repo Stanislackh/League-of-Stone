@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./signin.css";
 import { SERVER_URL } from "./consts";
-
+import logo from "./logo.png";
 import "./App.css";
 
 class Signin extends Component {
@@ -47,11 +47,10 @@ class Signin extends Component {
     return (
       <div id="accueil">
       <header>
-        <h1>League of Stones</h1>
-      < h3>Version UT2J</h3>
+        <img id="logo" src={logo} alt="logo" />
       </header>
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form id="regle" onSubmit={this.handleSubmit}>
           <div>
             <label>
               <input
@@ -75,10 +74,8 @@ class Signin extends Component {
             </label>
           </div>
           <div id="valider">
-            <label>
-              <input type="submit" value="Se connecter" />
+              <input id="bien" type="submit" value="Se connecter" />
               <Link to="/signup"><input id="bouton" type="submit" value="Créer un compte" /></Link>
-            </label>
           </div>
         </form>
       </div>
