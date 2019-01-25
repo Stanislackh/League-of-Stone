@@ -23,17 +23,19 @@ class Regles extends Component {
         mis à votre disposition dans votre deck de 20 cartes tirées aléatoirement
         dans un pool de 150 cartes disponibles</p>
         <p>
+        <ul>
         Vous avez droit à 3 actions par tour:
-          Vous pouvez piocher une carte
-          Vous pouvez attaquer les cartes adverses
-            si votre monstre à moins d'attaque que celui de l'adversaire il s'auto détruira
-            si votre monstre à le même niveau d'attaque que le montre adverse les deux seront détruites
-            si votre monstre a plus d'attaque il détruit le monstre adverse.
-          Une carte posée à un tour ne peux attaquer qu'au tour suivant.
-          Si votre adversaire n'a pas de monstre sur le plateau vous pourrez l'attaquer directement.
+          <li>Vous pouvez piocher une carte</li>
+          <ul>Vous pouvez attaquer les cartes adverses</ul>
+            <li>Si votre monstre à moins d'attaque que celui de l'adversaire il s'auto détruira. </li>
+            <li>Si votre monstre à le même niveau d'attaque que le montre adverse les deux seront détruites. </li>
+            <li>Si votre monstre a plus d'attaque il détruit le monstre adverse.</li>
+          <li>Une carte posée à un tour ne peux attaquer qu'au tour suivant.</li>
+          <li>Si votre adversaire n'a pas de monstre sur le plateau vous pourrez l'attaquer directement.</li>
+          </ul>
         </p>
         <p>
-          Good Luck ! Have Fun !
+          Good Luck ! Have Fun ! <3
         </p>
         </div>
         </body>
