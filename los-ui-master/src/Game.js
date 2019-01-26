@@ -34,8 +34,15 @@ class Game extends Component {
         </header>
         <body>
         <div>
+<<<<<<< HEAD
           <button onClick={this.handleDisconnect}>Deconnexion</button>
           <button >Damn</button>
+=======
+          <button basic>JOUER</button>
+          <button basic>Se Deconnecter</button>
+          <button basic>Suppression Compte</button>
+          <button basic>Regles du jeu</button>
+>>>>>>> Stan
         </div>
         </body>
       </div>
