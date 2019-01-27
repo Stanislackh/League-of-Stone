@@ -11,13 +11,13 @@ class Game extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>League of Stones</h2>
-          <p>Satania Best Waifu ! </p>
+          <p>Ready to fight ?</p>
         </header>
         <body>
         <div>
-          <button bsStyle="primary" bsSize="large" block>JOUER</button>
-          <button bsStyle="primary" bsSize="large" block>Se Deconnecter</button>
-          <button bsStyle="primary" bsSize="large" block>Suppression Compte</button>
+          <Link to="Board"><button  bsStyle="primary" bsSize="large" block>JOUER</button></Link>
+          <Link to="Signout"><button bsStyle="primary" bsSize="large" block>Se Deconnecter</button></Link>
+          <Link to="Board"><button bsStyle="primary" bsSize="large" block>Suppression Compte</button></Link>
           <Link to="Regles"><button bsStyle="primary" bsSize="large" block >Regles du jeu</button></Link>
         </div>
         </body>
