@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { redirect } from "react-router-dom";
 
 import axios from "axios";
 import { SERVER_URL } from "./consts";
@@ -8,8 +6,11 @@ import { SERVER_URL } from "./consts";
 import logo from "./logo.svg";
 import "./App.css";
 
-class Game extends Component {
+export class Game extends Component {
 
+  constructor(props) {
+    super(props);
+  }
   handleplay(e) {
     e.preventDefault();
     return (<div>!!!</div>);
@@ -21,7 +22,18 @@ class Game extends Component {
     axios.get(
       SERVER_URL +
       "/users/disconnect"
-      );
+      )
+      .then(res => {
+          if (res.data.status === "ok") {
+            this.props.history.push(process.env.PUBLIC_URL + "/");
+            console.log("appuyer");
+          }
+        });
+  }
+
+  handleTest() {
+    console.log("TEST");
+    console.log(this.props.isConnected);
   }
 
   render() {
@@ -34,15 +46,11 @@ class Game extends Component {
         </header>
         <body>
         <div>
-<<<<<<< HEAD
-          <button onClick={this.handleDisconnect}>Deconnexion</button>
-          <button >Damn</button>
-=======
+          <button onClick={ ()=> this.handleTest() }>Test</button>
           <button basic>JOUER</button>
-          <button basic>Se Deconnecter</button>
+          <button onClick={ this.handleDisconnect }>Se Deconnecter</button>
           <button basic>Suppression Compte</button>
           <button basic>Regles du jeu</button>
->>>>>>> Stan
         </div>
         </body>
       </div>

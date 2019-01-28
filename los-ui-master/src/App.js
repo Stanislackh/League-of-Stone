@@ -9,16 +9,16 @@ import {
 import Signin from "./Signin";
 import Signup from "./Signup";
 import Game from "./Game";
-import Jouer from "./Jouer";
 
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
+      console.log(rest)
       return rest.isConnected ? (
-        <Component {...props} />
+        <Component {...rest} />
       ) : (
         <Redirect to="/signin" />
       );
@@ -53,7 +53,7 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
-          <PrivateRoute component={Game} isConnected={this.state.isConnected} />
+          <PrivateRoute component={Game} isConnected={this.state} />
         </Switch>
       </Router>
     );
