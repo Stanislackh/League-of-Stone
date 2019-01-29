@@ -15,9 +15,8 @@ import "./App.css";
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => {
-      console.log(rest)
-      return rest.isConnected ? (
+    render={props => {
+      return rest.test.isConnected ? (
         <Component {...rest} />
       ) : (
         <Redirect to="/signin" />
@@ -53,7 +52,7 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
-          <PrivateRoute component={Game} isConnected={this.state} />
+          <PrivateRoute component={Game} test={this.state} />
         </Switch>
       </Router>
     );
