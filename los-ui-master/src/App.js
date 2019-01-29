@@ -9,7 +9,8 @@ import {
 import Signin from "./Signin";
 import Signup from "./Signup";
 import Game from "./Game";
-import Regles from "./Regles"
+import Regles from "./Regles";
+import Board from "./Board";
 
 import "./App.css";
 
@@ -52,6 +53,7 @@ class App extends Component {
             )}
           />
           />
+          <Route path="/board" component={Board} />
           <Route path="/signup" component={Signup} />
           <Route path="/regles" component={Regles}/>
           <PrivateRoute component={Game} isConnected={this.state.isConnected} />

@@ -78,3 +78,139 @@ h1{
 h3{
     text-align : center;
 }
+
+#page{
+    border-radius:25px;
+    background-image: url("jeu.jpeg");
+    background-size: cover;
+    display:inline-block;
+    margin-bottom:10px;
+    margin-left:250px;
+    border:solid;
+    width:700px;
+    margin-top:20px;
+}
+.pose{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+    }
+#cartesadv{
+    display:inline-block;
+    margin-left:25px;
+    width:400px;
+    height:120px;
+    border:solid;
+    }
+#adversaire{
+    margin-right: 15px;
+    margin-left:15px;
+    margin-top:20px;
+    height:120px;
+}
+
+#joueur{
+    margin-top:40px;
+    margin-bottom:20px;
+    margin-left:15px;
+    margin-right:15px;
+    height:120px;
+}
+#defadv{
+    border:solid;
+    border-radius:10px;
+    height:120px;
+    width:80px;
+    display:inline-block;
+    margin-left:25px;
+  
+}
+#deckadv{
+    background-image: url("cartes.png");
+    background-size: cover;
+    height:120px;
+    width:100px;
+    display:inline-block;
+    margin-left:8px;
+  
+}
+#cartesjoueur{
+    display:inline-block;
+    margin-left:25px;
+    width:400px;
+    height:120px;
+    }
+#defjoueur{
+    border:solid;
+    height:120px;
+    width:80px;
+    display:inline-block;
+    margin-left:8px;
+    border-radius:10px;
+  
+}
+
+#deckjoueur{
+    /*background-image: url("cartes.png");
+    background-size: cover;
+    height:120px;
+    width:100px;*/
+    display:inline-block;
+    margin-left:50px;
+  
+}
+#plateau{
+    border-radius:15px;
+    border:solid;
+    background-image: url("plateau.jpg");
+    background-size: cover;
+    margin-left:15px;
+    margin-right:15px;
+    margin-top:20px;
+    margin-bottom:20px;
+    border:solid;
+    height:270px;
+}
+#jeuadv{
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+    height:100px;
+}
+#jeujoueur{
+    margin-top:5px;
+    margin-bottom:20px;
+    margin-left:10px;
+    margin-right:10px;
+    height:100px;
+}
+#lp{
+    height:20px;
+    margin-left:200px;
+    margin-right:200px;
+    border:solid;
+}
+.card {
+	display: inline-block;
+	border: 1px solid #000000;
+	border-radius: 5px;
+	width: 65px;
+	height: 100px;
+}
+#cartesjoueur .card + .card {
+	margin-left: -10px;
+}
+#cartesjoueur .card {
+	float: left;
+	margin-left: 30px;
+}
+#cartesjoueur .card:hover {
+	margin-top: -50px;
+}
+
+
