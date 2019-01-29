@@ -4,6 +4,7 @@ import axios from "axios";
 import {SERVER_URL} from "./consts";
 import "./game.css";
 import logo from "./logo.png";
+import { Link } from "react-router-dom";
 
 class Game extends Component {
     constructor(props) {
