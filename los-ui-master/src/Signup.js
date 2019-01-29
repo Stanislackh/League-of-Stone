@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import logo from "./logo.png";
 import { SERVER_URL } from "./consts";
 import "./signup.css";
 class Signup extends Component {
@@ -62,10 +62,9 @@ class Signup extends Component {
     return (
       <div id="acc">
         <header>
-          <h1>League of Stones</h1>
-          <h3>Version UT2J</h3>
+          <img id="logo" src={logo} alt="logo" />
         </header>
-        <form onSubmit={this.handleSubmit}>
+        <form id="regle" onSubmit={this.handleSubmit}>
           <div>{this.state.error}</div>
           <div id="text">Inscrivez-vous :</div>
           <label>
@@ -101,7 +100,7 @@ class Signup extends Component {
             />
           </label>
           <div id="val">
-            <input type="submit" value="S'inscrire" />
+            <input id="bien" type="submit" value="S'inscrire" />
             <Link to="/signin"><input id="bout" type="submit" value="Se connecter" /></Link>
           </div>      
         </form>

@@ -1,22 +1,20 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./game.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
+import logo from "./logo.png";
+import { Link } from "react-router-dom";
 class Regles extends Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h2>League of Stones</h2>
-          <p>Règles du jeu</p>
+      <div id="accueil">
+        <header>
+        <Link to="Game"><img id="logo" src={logo} alt="logo" /></Link>
         </header>
-        <body>
-        <div>
         Les règles sont les suivantes :
         <p>
         Réduire la vie de votre adversaire à 0 en vous aidant des champions
@@ -53,7 +51,7 @@ class Regles extends Component {
           Good Luck ! Have Fun !
         </p>
         </div>
-        </body>
+        </div>
       </div>
     );
   }
