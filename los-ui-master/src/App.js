@@ -17,7 +17,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={props => {
       return rest.isConnected ? (
-        <Component {...props} />
+        <Component {...rest} />
       ) : (
         <Redirect to="/signin" />
       );
