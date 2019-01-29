@@ -7,10 +7,12 @@
 a{
     text-decoration: none;
 }
+
 #mdp{
     margin-top : 30px;
+    margin-left : 6px;
     text-align : center;
-    width : 300px;
+    width : 260px;
 }
 header{
     border : solid;
@@ -30,9 +32,30 @@ h3{
 }
 #valider{
     margin-top:20px;
-    align : center;
-    margin-left:25px;
+    margin-left:10px;
+    margin-bottom : 10px;
 }
 #bouton{
-    margin-left:10px;
+    margin-left:5px;
+    color : #db3333;
+    background-color : transparent;
+    border-color:#dd2e2e;
+    border-radius : 5px;
+    height:25px;
+}
+#bouton:hover{
+    background-color : #db3333;
+    color : white;
+}
+#bien{
+    display : inline;
+    height:25px;
+    color : #db3333;
+    background-color : transparent;
+    border-color:#dd2e2e;
+    border-radius : 5px;
+}
+#bien:hover{
+    background-color : #db3333;
+    color : white;
 }

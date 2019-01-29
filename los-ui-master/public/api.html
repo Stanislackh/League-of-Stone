@@ -1,0 +1,1165 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <div class="heading">
+                <span class="http_method">
+                  GET
+                </span>
+                <span class="path">
+                  /lol/static-data/v3/champions : 
+                </span>
+                Retrieves champion list
+               
+            </div>
+            <div>
+              <a src="champions-stats.json">champions-stats.json</a>
+            </div>
+    <div class="api_block">
+        <h4>Response Classes</h4>
+        <div class="block response_body">
+         
+           <h4>Return value: ChampionListDto </h4>
+         
+        </div>
+        
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">ChampionListDto </h5>
+     
+     - This object contains champion list data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>keys</td>
+                <td>Map[string, string]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>data</td>
+                <td>Map[string, ChampionDto]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>version</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>type</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>format</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">ChampionDto </h5>
+     
+     - This object contains champion data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>info</td>
+                <td>InfoDto</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>enemytips</td>
+                <td>List[string]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>stats</td>
+                <td>StatsDto</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>title</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>image</td>
+                <td>ImageDto</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>tags</td>
+                <td>List[string]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>partype</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>skins</td>
+                <td>List[SkinDto]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>passive</td>
+                <td>PassiveDto</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>recommended</td>
+                <td>List[RecommendedDto]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>allytips</td>
+                <td>List[string]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>key</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>lore</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>id</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>blurb</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>spells</td>
+                <td>List[ChampionSpellDto]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">InfoDto </h5>
+     
+     - This object contains champion information.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>difficulty</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>attack</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>defense</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>magic</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">StatsDto </h5>
+     
+     - This object contains champion stats data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>armorperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>hpperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>attackdamage</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>mpperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>attackspeedoffset</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>armor</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>hp</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>hpregenperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>spellblock</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>attackrange</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>movespeed</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>attackdamageperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>mpregenperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>mp</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>spellblockperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>crit</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>mpregen</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>attackspeedperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>hpregen</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>critperlevel</td>
+                <td>double</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">ImageDto </h5>
+     
+     - This object contains image data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>full</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>group</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>sprite</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>h</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>w</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>y</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>x</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">SkinDto </h5>
+     
+     - This object contains champion skin data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>num</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>id</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">PassiveDto </h5>
+     
+     - This object contains champion passive data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>image</td>
+                <td>ImageDto</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>sanitizedDescription</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>description</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">RecommendedDto </h5>
+     
+     - This object contains champion recommended data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>map</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>blocks</td>
+                <td>List[BlockDto]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>champion</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>title</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>priority</td>
+                <td>boolean</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>mode</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>type</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">BlockDto </h5>
+     
+     - This object contains champion recommended block data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>items</td>
+                <td>List[BlockItemDto]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>recMath</td>
+                <td>boolean</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>type</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">BlockItemDto </h5>
+     
+     - This object contains champion recommended block item data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>count</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>id</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">ChampionSpellDto </h5>
+     
+     - This object contains champion spell data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>cooldownBurn</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>resource</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>leveltip</td>
+                <td>LevelTipDto</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>vars</td>
+                <td>List[SpellVarsDto]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>costType</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>image</td>
+                <td>ImageDto</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>sanitizedDescription</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>sanitizedTooltip</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>effect</td>
+                <td>List[object]</td>
+                <td>This field is a List of List of Double.
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>tooltip</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>maxrank</td>
+                <td>int</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>costBurn</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>rangeBurn</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>range</td>
+                <td>object</td>
+                <td>This field is either a List of Integer or the String 'self' for spells that target one's own champion.
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>cooldown</td>
+                <td>List[double]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>cost</td>
+                <td>List[int]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>key</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>description</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>effectBurn</td>
+                <td>List[string]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>altimages</td>
+                <td>List[ImageDto]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">LevelTipDto </h5>
+     
+     - This object contains champion level tip data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>effect</td>
+                <td>List[string]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>label</td>
+                <td>List[string]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   <div class="block response_body">
+   
+     <h5 style="display: inline;">SpellVarsDto </h5>
+     
+     - This object contains spell vars data.
+     
+   
+     <br>
+   
+     <table class="table">
+        <thead>
+           <tr>
+              <th>Name</th>
+              <th style="min-width:80px;">Data Type</th>
+              <th>Description</th>
+           </tr>
+        </thead>
+   
+        <tbody>
+           
+                <tr>
+                <td>ranksWith</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>dyn</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>link</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>coeff</td>
+                <td>List[double]</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+                <tr>
+                <td>key</td>
+                <td>string</td>
+                <td>
+                
+                </td>
+             </tr>
+           
+        </tbody>
+   
+     </table>
+   </div>
+   
+   
+   <hr>
+   
+   
+     </div>
+</body>
+</html>
