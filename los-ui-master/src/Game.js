@@ -15,8 +15,7 @@ class Game extends Component {
         this.deconnexion = this.deconnexion.bind(this);
     }
 
-    deconnexion(e) {
-        e.preventDefault();
+    deconnexion() {
         axios
             .get(
                 SERVER_URL + "/users/disconnect?token=" + this.state.token
@@ -50,7 +49,7 @@ class Game extends Component {
         <div id="milieu">
             <div id="pla">
               <Link to="Board"><input className="bla" type="submit" value="Jouer!" /></Link>
-              <Link to="Signin" onClick={this.deconnexion}><input className="bla" type="submit" value="Deconnexion" /></Link>
+              <Link to="Signin" onClick={() => this.deconnexion() }><input className="bla" type="submit" value="Deconnexion" /></Link>
               <input className="bla" type="button" value="Supprimer compte" />
               <Link to="Regles"><input className="bla" type="submit" value="Règles du jeu" /></Link>
             </div>
