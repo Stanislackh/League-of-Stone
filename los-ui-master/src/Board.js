@@ -5,29 +5,48 @@ import "./App.css";
 import { Link } from "react-router-dom";
 import "./game.css";
 import logo from "./logo.png";
+import axios from "axios";
+import { SERVER_URL } from "./consts";
+
 class Board extends Component {
 
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			error: null,
-			isLoaded: false,
 			champions: [],
 		};
 	}
 
-
-	randomPick(champs, number) {
-		let rChamps = [];
-		for (let i = 0; i < number ; i++) {
-			let elem = champs.splice(Math.floor(Math.random() * champs.length), 1)[0];
-			rChamps.push({"id": elem.key, "name": elem.name, "img": elem.key + "_0.jpg", "attack":elem.info.attack , "defense":elem.info.defense });
+/*Essaie de récupérer les cartes*/
+	recupCartes(){
+			axios.get(
+				SERVER_URL + "/card/getAll"
+			)
+			.then(res => {
+				this.state.champions.push({"id": res.data.id, "name": res.data.name, "img": res.data.image.sprite, "attack":res.data.stats.attack , "defense":res.data.stats.defense })
+			});
 		}
 
-		return rChamps;
+
+/*Essaie de prendre les cartes aléatoirement*/
+/*dans un vrai langage ...
+	def randomPick(champions):
+		res =[]
+		for i in range(19):
+*/
+
+
+	randomPick(champs) {
+		let rPick = [];
+		for (let i = 0; i < 20 ; i++) {
+			let elem = champs.splice(Math.floor(Math.random() * champs.length), 1)[0];
+			rPick.push({"id": champs.data.id, "name": champs.data.name, "img": champs.data.image.sprite, "attack":champs.data.stats.attack , "defense":champs.data.stats.defense });
+		}
+		return rPick;
 	}
 
+	/*
 	deckcards(champs) {
 		let cards = [];
 		for (let i = 0; i < 120; i++) {
@@ -43,8 +62,9 @@ class Board extends Component {
 		}
 		return cards;
 	}
+*/
 
-
+/*Essaie de mélanger dans le deck*/
 	shuffle(a) {
 		for (let i = a.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
@@ -52,10 +72,7 @@ class Board extends Component {
 		}
 		return a;
 	}
-
-
-
-
+/*
 	componentWillReceiveProps(nextProps) {
 		fetch("champions-info-image-stats-sort.json")
 			.then(res => res.json())
@@ -75,7 +92,8 @@ class Board extends Component {
 				}
 			);
 	}
-
+*/
+/*
 	componentDidMount() {
 		fetch("champions-info-image-stats-sort.json")
 			.then(res => res.json())
@@ -114,7 +132,7 @@ class Board extends Component {
 			);
 		}
 	}
-
+*/
     render(){
         return (
         <div id="page">
@@ -158,7 +176,7 @@ class Board extends Component {
                     <div id="defjoueur">
                     </div>
                     <div id="cartesjoueur">
-                        <object draggable="true" class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+                        <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
 		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
 		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
 		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
