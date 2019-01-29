@@ -39,7 +39,7 @@ class Game extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h2>League of Stones</h2>
                     <p>Bienvenue</p>
-                    <Link to="/signin" onClick={this.deconnexion}>Deconnexion</Link>
+                    <Link to="/signin" onClick={() => this.deconnexion()}>Deconnexion</Link>
                 </header>
             </div>
         );

@@ -51,8 +51,6 @@ class Regles extends Component {
           Good Luck ! Have Fun !
         </p>
         </div>
-        </div>
-      </div>
     );
   }
 }
