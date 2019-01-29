@@ -1,6 +1,13 @@
 import React, {Component} from "react";
 import Card from "./Card";
 import "./Card.css";
+import "./App.css";
+import { Link } from "react-router-dom";
+import "./game.css";
+import logo from "./logo.png";
+import * as jquery from "jquery";
+import "jquery-ui-dist/jquery-ui";
+import $ from "jquery";
 class Board extends Component {
 
 
@@ -12,9 +19,6 @@ class Board extends Component {
 			champions: [],
 		};
 	}
-
-
-
 
 
 	randomPick(champs, number) {
@@ -118,16 +122,7 @@ class Board extends Component {
 	}
 }
 
-export default Board;
-=======
-import React, { Component } from "react";
-import "./App.css";
-import { Link } from "react-router-dom";
-import "./game.css";
-import logo from "./logo.png";
-import * as jquery from "jquery";
-import "jquery-ui-dist/jquery-ui";
-import $ from "jquery";
+
 function allowDrop(ev) {
     ev.preventDefault();
   }
@@ -191,7 +186,7 @@ class Board extends Component {
                         </div>
                         <div className="pose">                            
                         </div>
-                        <div className="pose" ondrop={drop(event)} ondragover={allowDrop(event)}>
+                        <div className="pose">
                         </div>
                     </div>
                 </div>
@@ -199,7 +194,7 @@ class Board extends Component {
                     <div id="defjoueur">                        
                     </div>
                     <div id="cartesjoueur">
-                        <object draggable="true" class="card" clickon={(event)=>this.handleClick(event)} type="image/svg+xml" data="demo.svg">🂠</object>
+                        <object draggable="true" class="card" type="image/svg+xml" data="demo.svg">🂠</object>
 		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
 		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
 		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
