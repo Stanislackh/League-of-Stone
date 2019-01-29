@@ -11,10 +11,13 @@ class Regles extends Component {
   }
   render() {
     return (
+
       <div id="accueil">
         <header>
         <Link to="Game"><img id="logo" src={logo} alt="logo" /></Link>
         </header>
+        <div id="regle">
+         <div id= "ecart">
         Les règles sont les suivantes :
         <p>
         Réduire la vie de votre adversaire à 0 en vous aidant des champions
@@ -51,6 +54,11 @@ class Regles extends Component {
           Good Luck ! Have Fun !
         </p>
         </div>
+<<<<<<< HEAD
+=======
+        </div>
+        </div>
+>>>>>>> 389e6e8fca9d01ff8d3b46a764544d25831e7eb3
     );
   }
 }

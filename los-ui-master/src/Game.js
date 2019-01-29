@@ -1,10 +1,7 @@
-import React, {Component} from "react";
-
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 import {SERVER_URL} from "./consts";
-import { Link } from "react-router-dom";
 import "./game.css";
 import logo from "./logo.png";
 
@@ -26,8 +23,7 @@ class Game extends Component {
             .then(res => {
                 if (res.data.status === "ok") {
                     this.props.setSessionToken(res.data.token);
-                    this.props.history.push(process.env.PUBLIC_URL + "/");
-                    this.props.history.push({pathname:process.env.PUBLIC_URL + "/"})
+                    this.props.history.push(process.env.PUBLIC_URL + "/signin");
                 }
             });
     }
@@ -53,7 +49,7 @@ class Game extends Component {
         <div id="milieu">
             <div id="pla">
               <Link to="Board"><input className="bla" type="submit" value="Jouer!" /></Link>
-              <Link to="Signin"><input className="bla" type="submit" value="Deconnexion" /></Link>
+              <Link to="Signin" onClick={this.deconnexion}><input className="bla" type="submit" value="Deconnexion" /></Link>
               <input className="bla" type="button" value="Supprimer compte" />
               <Link to="Regles"><input className="bla" type="submit" value="Règles du jeu" /></Link>
             </div>
