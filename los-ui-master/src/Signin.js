@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import "./signin.css";
 import { SERVER_URL } from "./consts";
 
 import "./App.css";
@@ -47,6 +47,11 @@ class Signin extends Component {
 
   render() {
     return (
+      <div id="accueil">
+      <header>
+        <h1>League of Stones</h1>
+      < h3>Version UT2J</h3>
+      </header>
       <div>
         <form onSubmit={this.handleSubmit}>
           Connectez-vous :
@@ -55,9 +60,11 @@ class Signin extends Component {
               Login :{" "}
               <input
                 type="text"
+                id = "mdp"
+                placeholder = "Entrez votre Login"
                 value={this.state.email}
                 onChange={this.handleChangeEmail}
-              />
+              /><br />
             </label>
           </div>
           <div>
@@ -65,21 +72,21 @@ class Signin extends Component {
               Mot de passe :{" "}
               <input
                 type="password"
+                id="mdp"
+                placeholder = "Entrez votre mot de passe"
                 value={this.state.password}
                 onChange={this.handleChangePassword}
               />
             </label>
           </div>
-          <div>
-            <input type="submit" value="Se connecter" />
+          <div id="valider">
+            <label>
+              <input type="submit" value="Se connecter" />
+              <Link to="/signup"><input id="bouton" type="submit" value="Créer un compte" /></Link>
+            </label>
           </div>
         </form>
-        <div>
-          {
-            "Vous n’avez pas de compte ? Créez votre compte en quelques secondes "
-          }
-          <Link to="/signup">en cliquant ici !</Link>
-        </div>
+      </div>
       </div>
     );
   }

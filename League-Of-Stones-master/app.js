@@ -45,7 +45,7 @@ function initApp(losDB) {
   app.use(cors());
 
   app.get('/', function(req, res) {
-    tools.sendData(res, 'Hello World ! ', req);
+    tools.sendData(res, 'Chocobo! ', req);
   });
 
   users.init(app, tools, losDB);
