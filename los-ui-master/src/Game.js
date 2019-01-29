@@ -1,11 +1,8 @@
 import React, {Component} from "react";
-
-import React, { Component } from "react";
 import "./App.css";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {SERVER_URL} from "./consts";
-import { Link } from "react-router-dom";
 import "./game.css";
 import logo from "./logo.png";
 
