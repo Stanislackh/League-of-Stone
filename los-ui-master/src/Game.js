@@ -13,9 +13,9 @@ class Game extends Component {
         </header>
         <div id="milieu">
             <div id="pla">
-              <input className="bla" type="submit" value="Jouer!" />
+              <Link to="Board"><input className="bla" type="submit" value="Jouer!" /></Link>
               <Link to="Signin"><input className="bla" type="submit" value="Deconnexion" /></Link>
-              <input className="bla" type="submit" value="Supprimer compte" />
+              <input className="bla" type="button" value="Supprimer compte" />
               <Link to="Regles"><input className="bla" type="submit" value="Règles du jeu" /></Link>
             </div>
         </div>
