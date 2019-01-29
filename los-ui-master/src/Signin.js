@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import "./signin.css";
 import { SERVER_URL } from "./consts";
 
 import "./App.css";
@@ -31,8 +31,103 @@ class Signin extends Component {
       )
       .then(res => {
         if (res.data.status === "ok") {
-          console.log(res.data);
-          this.props.setSessionToken(res.data);
+          this.props.setSessionToken(res.data.token);
+
+          this.props.history.push({pathname:process.env.PUBLIC_URL + "/",
+          state:{ pseudo:res.data.data.name, email: res.data.data.email, token:res.data.data.token}});
+        }
+      });
+  }
+  handleChangeEmail(e) {
+    this.setState({ email: e.target.value });
+  }
+  handleChangePassword(e) {
+    this.setState({ password: e.target.value });
+  }
+
+  render() {
+    return (
+      <div id="accueil">
+      <header>
+        <h1>League of Stones</h1>
+      < h3>Version UT2J</h3>
+      </header>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          Connectez-vous :
+          <div>
+            <label>
+              Login :{" "}
+              <input
+                type="text"
+                id = "mdp"
+                placeholder = "Entrez votre Login"
+                value={this.state.email}
+                onChange={this.handleChangeEmail}
+              /><br />
+            </label>
+          </div>
+          <div>
+            <label>
+              Mot de passe :{" "}
+              <input
+                type="password"
+                id="mdp"
+                placeholder = "Entrez votre mot de passe"
+                value={this.state.password}
+                onChange={this.handleChangePassword}
+              />
+            </label>
+          </div>
+          <div id="valider">
+            <label>
+              <input type="submit" value="Se connecter" />
+              <Link to="/signup"><input id="bouton" type="submit" value="Créer un compte" /></Link>
+            </label>
+          </div>
+        </form>
+      </div>
+      </div>
+    );
+  }
+}
+
+export default Signin;
+=======
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import "./signin.css";
+import { SERVER_URL } from "./consts";
+import logo from "./logo.png";
+import "./App.css";
+
+class Signin extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: ""
+    };
+
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    axios
+      .get(
+        SERVER_URL +
+          "/users/connect?email=" +
+          this.state.email +
+          "&password=" +
+          this.state.password
+      )
+      .then(res => {
+        if (res.data.status === "ok") {
+          this.props.setSessionToken(res.data.token);
           this.props.history.push(process.env.PUBLIC_URL + "/");
         }
       });
@@ -46,14 +141,18 @@ class Signin extends Component {
 
   render() {
     return (
+      <div id="accueil">
+      <header>
+        <img id="logo" src={logo} alt="logo" />
+      </header>
       <div>
-        <form onSubmit={this.handleSubmit}>
-          Connectez-vous :
+        <form id="regle" onSubmit={this.handleSubmit}>
           <div>
             <label>
-              Login :{" "}
               <input
                 type="text"
+                id = "mdp"
+                placeholder = "Entrez votre Login"
                 value={this.state.email}
                 onChange={this.handleChangeEmail}
               />
@@ -61,24 +160,21 @@ class Signin extends Component {
           </div>
           <div>
             <label>
-              Mot de passe :{" "}
               <input
                 type="password"
+                id="mdp"
+                placeholder = "Entrez votre mot de passe"
                 value={this.state.password}
                 onChange={this.handleChangePassword}
               />
             </label>
           </div>
-          <div>
-            <input type="submit" value="Se connecter" />
+          <div id="valider">
+              <input id="bien" type="submit" value="Se connecter" />
+              <Link to="/signup"><input id="bouton" type="submit" value="Créer un compte" /></Link>
           </div>
         </form>
-        <div>
-          {
-            "Vous n’avez pas de compte ? Créez votre compte en quelques secondes "
-          }
-          <Link to="/signup">en cliquant ici !</Link>
-        </div>
+      </div>
       </div>
     );
   }
