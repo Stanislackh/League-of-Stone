@@ -97,24 +97,6 @@ class Board extends Component {
 			);
 		}
 
-	render() {
-
-		const {error, isLoaded, champions} = this.state;
-
-		if (error) {
-			return <div>Error: {error.message}</div>;
-		} else if (!isLoaded) {
-			return <div>Loading...</div>;
-		} else {
-			let cards = this.deckcards(champions);
-			return (
-				<section className="row" classID="board">
-					{cards}
-				</section>
-			);
-		}
-	}
-
     render(){
         return (
         <div id="page">

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import "./game.css";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import logo from "./logo.png";
 import { Link } from "react-router-dom";
+
 class Regles extends Component {
   constructor(props) {
     super(props);

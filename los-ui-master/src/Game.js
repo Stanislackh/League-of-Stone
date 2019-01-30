@@ -23,23 +23,38 @@ class Game extends Component {
             .then(res => {
                 if (res.data.status === "ok") {
                     this.props.setSessionToken(res.data.token);
-                    this.props.history.push(process.env.PUBLIC_URL + "/signin");
+                    this.props.history.push(process.env.PUBLIC_URL);
                 }
             });
     }
 
-    render() {
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h2>League of Stones</h2>
-                    <p>Bienvenue</p>
-                    <Link to="/signin" onClick={() => this.deconnexion()}>Deconnexion</Link>
-                </header>
-            </div>
-        );
+    handleUsers() {
+      /*
+      axios
+      .get(SERVER_URL + "/users/amIConnected")
+      .then(res => {
+        if(res.data.status === "ok") {
+          this.props.history.push(process.env.PUBLIC_URL);
+        }
+      })*/
     }
+
+    handleCards() {
+      axios
+            .get(
+                SERVER_URL + "/cards/getAll"
+            )
+            .then(res => {
+                if (res.data.status === "ok") {
+                    console.log(res.data);
+                    this.props.history.push(process.env.PUBLIC_URL);
+                }
+                else{
+                  console.log("no");
+                }
+            });
+    }
+
   render() {
     return (
       <div id="accueil">
@@ -52,6 +67,10 @@ class Game extends Component {
               <Link to="Signin" onClick={() => this.deconnexion() }><input className="bla" type="submit" value="Deconnexion" /></Link>
               <input className="bla" type="button" value="Supprimer compte" />
               <Link to="Regles"><input className="bla" type="submit" value="Règles du jeu" /></Link>
+              
+              <input className="bla" type="button" onClick={ ()=>this.handleUsers() } value="Get users" />
+              <input className="bla" type="button" onClick={ ()=>this.handleCards() } value="Get users" />
+
             </div>
         </div>
       </div>
