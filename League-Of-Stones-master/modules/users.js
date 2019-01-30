@@ -1,7 +1,6 @@
+var bcrypt = require('bcrypt');
 module.exports = {
   init: function(app, tools, losDB) {
-    var ObjectId = require('mongodb').ObjectID;
-
     app.get('/users/getAll', function(req, res) {
       losDB
         .collection('Users')
@@ -20,7 +19,8 @@ module.exports = {
     });
 
     app.get('/users/subscribe', function(req, res) {
-      var hashPass = req.query.password;
+      var saltRounds = 10; // cost factor
+      var hashPass = bcrypt.hashSync(req.query.password, saltRounds); //Hash creation with bcrypt
       var email = req.query.email;
       var name = req.query.name;
       if (hashPass && email && name) {
@@ -32,11 +32,12 @@ module.exports = {
             } else if (document) {
               tools.sendError(res, 'User already exists');
             } else {
+
               losDB.collection('Users').insertOne(
                 {
                   email: email,
-                  password: hashPass,
-                  name: name
+                  name: name,
+                  password: hashPass
                 },
                 function(err, result) {
                   if (err == null) {
@@ -60,6 +61,7 @@ module.exports = {
       var sess = req.session;
       var hashPass = req.query.password;
       var email = req.query.email;
+
       if (hashPass && email) {
         if (
           sess &&
@@ -70,35 +72,36 @@ module.exports = {
           losDB
             .collection('Users')
             .findOne({ email: email }, function(err, document) {
-              if (err) {
+              if (err || !document) {
                 tools.sendError(res, 'Error during reaching MongoDB : ' + err);
-              } else if (document && document.password == hashPass) {
-                losDB.collection('Users').remove(
-                  {
-                    email: email
-                  },
-                  function(err, result) {
-                    if (err == null) {
-                      tools.removeInteractFromUser(
-                        sess.connectedUser._id,
-                        losDB
-                      );
-                      sess.connectedUser = null;
-                      tools.sendData(res, 'User deleted', req, losDB);
-                    } else {
-                      tools.sendError(
-                        res,
-                        'Error during deleting a user : ' + err
-                      );
-                    }
-                  }
-                );
-              } else {
-                tools.sendError(res, "User doesn't exist");
+                return;
               }
+              bcrypt.compare(hashPass, document.password).then((isSameHash)=>{
+                if (isSameHash) {
+                 losDB.collection('Users').remove(
+                   {email},
+                   function(err, result) {
+                     if (err == null) {
+                       tools.removeInteractFromUser(
+                         sess.connectedUser._id,
+                         losDB
+                       );
+                       sess.connectedUser = null;
+                       tools.sendData(res, 'User deleted', req, losDB);
+                     } else {
+                       tools.sendError(
+                         res,
+                         'Error during deleting a user : ' + err
+                       );
+                     }
+                   }
+                 );
+               } else {
+                 tools.sendError(res, "User doesn't exist");
+               }
+              });
             });
         } else {
-          console.log('session different from user');
           tools.sendError(res, "User doesn't exist");
         }
       } else {
@@ -110,39 +113,39 @@ module.exports = {
     app.get('/users/connect', function(req, res) {
       var sess = req.session;
       var email = req.query.email;
-      var password = req.query.password;
+      var hash = req.query.password;
+      
       if (sess && sess.connectedUser) {
         tools.sendError(res, 'Already connected');
-      } else {
-        losDB
-          .collection('Users')
-          .findOne({ email: email }, function(err, document) {
-            if (err) {
-              tools.sendError(res, 'Error during reaching MongoDB : ' + err);
-            } else if (document) {
-              if (document.password == password) {
-                sess.connectedUser = document;
-                tools.sendData(
-                  res,
-                  {
-                    id: document._id,
-                    token: sess.id,
-                    email: document.email,
-                    name: document.name
-                  },
-                  req,
-                  losDB
-                );
-              } else {
-                console.log('WRONG PASS');
-                tools.sendError(res, 'Email or password incorrect');
-              }
+        return;
+      } 
+      losDB
+        .collection('Users')
+        .findOne({ email: email }, function(err, document) {
+          if (err) {
+            tools.sendError(res, 'Error during reaching MongoDB : ' + err);
+          } else if (document) {
+            bcrypt.compare(hash, document.password).then((isSameHash)=> { 
+              if(isSameHash){
+              sess.connectedUser = document;
+              tools.sendData(
+                res,
+                {
+                  id: document._id,
+                  token: sess.id,
+                  email: document.email,
+                  name: document.name
+                },
+                req,
+                losDB
+              );
             } else {
-              console.log('NO EMAIL');
               tools.sendError(res, 'Email or password incorrect');
-            }
-          });
-      }
+            }});
+          } else {
+            tools.sendError(res, 'Email or password incorrect');
+          }
+        });
     });
 
     app.get('/users/disconnect', function(req, res) {
@@ -188,5 +191,6 @@ module.exports = {
         }
       }
     });
+
   }
 };

@@ -5,7 +5,7 @@ import "./App.css";
 import { Link } from "react-router-dom";
 import "./game.css";
 import logo from "./logo.png";
-import axios from "axios";
+import Axios from "axios";
 import { SERVER_URL } from "./consts";
 
 class Board extends Component {
@@ -15,20 +15,99 @@ class Board extends Component {
 		super(props);
 		this.state = {
 			champions: [],
+			cards:[]
 		};
 	}
 
 /*Essaie de récupérer les cartes*/
 	recupCartes(){
-			axios.get(
-				SERVER_URL + "/card/getAll"
+		console.log("RecupCarte");
+			Axios
+				.get(
+				SERVER_URL + "/cards/getAll"
 			)
 			.then(res => {
-				this.state.champions.push({"id": res.data.id, "name": res.data.name, "img": res.data.image.sprite, "attack":res.data.stats.attack , "defense":res.data.stats.defense })
+				if(res.data.status === "ok"){
+					this.setState({
+						champions : res.data.data
+					})
+					console.log(this.state.champions)
+					this.randomPick(this.state.champions);
+					this.deckcards(this.state.champions);
+					this.recupInfosAttack(this.state.champions);
+
+				}
+				else{
+					console.log("NOK");
+				}
+				//this.state.champions.push({"id": res.data.id, "name": res.data.name, "img": res.data.image.sprite, "attack":res.data.stats.attack , "defense":res.data.stats.defense });
+				//console.log(res);
 			});
 		}
 
+		/*Pick aléatoire*/
+			randomPick(champs) {
+				console.log("random");
 
+								let rPick = [];
+				let rrPick = [];
+				for (let i = 0; i < 134; i++) {
+					 /*rPick.push({
+					"Heros": this.state.champions[i].key,
+					"Image" : this.state.champions[i].key + "_1.jpg",
+					"Attack" : this.state.champions[i].info.attack,
+					"Defense" :this.state.champions[i].info.defense});
+					console.log(rPick[i]);*/
+
+					this.state.cards.push(
+					<Card id={this.state.champions[i].id}
+						  name={this.state.champions[i].name}
+						  img={this.state.champions[i].img}
+						  attack={this.state.champions[i].info.attack}
+						  defense={this.state.champions[i].info.defense}
+						  key={i}
+						  //onClick={this.handleClick.bind(this, i)}
+					/>);
+					}
+
+
+				console.log("SUPERRANDOM");
+
+				for(let j = 0; j < 20; j++){
+					let rand = Math.floor((Math.random() * 135) + 1);
+						rrPick.push(rPick[rand]);
+						console.log(rrPick[j]);
+					}
+				return rrPick;
+}
+
+	/*EAttribut les valeurs a la carte */
+
+	donneValeur(){
+		console.log("re");
+	}
+
+	/*Affiche les points de vie*/
+/*	pointVieJ() {
+		let vieJ = 150;
+	return pointVieJ;
+	}
+
+	pointVieA() {
+		let vieA = 150;
+		return vieA;
+	}
+
+	gagne() {
+		if(vieJ === 0){
+			console.log("You are dead")
+		}
+
+		if(vieA === 0){
+			console.log("You win !")
+		}
+	}
+*/
 /*Essaie de prendre les cartes aléatoirement*/
 /*dans un vrai langage ...
 	def randomPick(champions):
@@ -37,40 +116,29 @@ class Board extends Component {
 */
 
 
-	randomPick(champs) {
-		let rPick = [];
-		for (let i = 0; i < 20 ; i++) {
-			let elem = champs.splice(Math.floor(Math.random() * champs.length), 1)[0];
-			rPick.push({"id": champs.data.id, "name": champs.data.name, "img": champs.data.image.sprite, "attack":champs.data.stats.attack , "defense":champs.data.stats.defense });
-		}
-		return rPick;
-	}
 
-	/*
+/*tente de créer un deck*/
 	deckcards(champs) {
-		let cards = [];
+		console.log("deckinit");
+		Axios.get(
+			SERVER_URL + "/match/initDeck"
+		)
+		.then(res =>{
 		for (let i = 0; i < 120; i++) {
-			cards.push(
-				<Card id={champs[i].id}
-					  name={champs[i].name}
-					  img={champs[i].img}
-					  attack={champs[i].attack}
-					  defense={champs[i].defense}
-					  key={i}
-
-				/>);
+			res.push(
+				<Card id={this.state.champions[i].id}
+					  name={this.state.champions[i].name}
+					  img={this.state.champions[i].img}
+					  attack={this.state.champions[i].attack}
+					  defense={this.state.champions[i].defense}
+					  key={i}/>);
 		}
-		return cards;
-	}
-*/
+	})
+}
 
-/*Essaie de mélanger dans le deck*/
-	shuffle(a) {
-		for (let i = a.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[a[i], a[j]] = [a[j], a[i]];
-		}
-		return a;
+	recupInfosAttack(){
+		console.log("Recup info attack");
+		return this.state.Champions[0].info.attack
 	}
 /*
 	componentWillReceiveProps(nextProps) {
@@ -101,9 +169,6 @@ class Board extends Component {
 				(result) => {
 					let rChamps = this.randomPick(result, this.props.number);
 					let champions = this.shuffle(rChamps);
-					this.setState({
-						isLoaded: true,
-						champions: champions
 					});
 				},
 				(error) => {
@@ -176,11 +241,11 @@ class Board extends Component {
                     <div id="defjoueur">
                     </div>
                     <div id="cartesjoueur">
-                        <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
-		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
-		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
-		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
-		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+										{this.state.cards}
+		                <img class="card" type="image/svg+xml" src=""/>
+
+										<button onClick={()=>this.recupCartes()}> click 1 </button>
+										<button onClick={()=>this.randomPick(this.state.champions)}> click 2</button>
                     </div>
                     <div id="deckjoueur">
                         <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
