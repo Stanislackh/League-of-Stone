@@ -8,12 +8,15 @@ import { Link } from "react-router-dom";
 class Regles extends Component {
   constructor(props) {
     super(props);
+    this.state={
+        token:props.location.token
+    }
   }
   render() {
     return (
       <div id="accueil">
         <header>
-        <Link to="Game"><img id="logo" src={logo} alt="logo" /></Link>
+        <Link to={{pathname:"Game", token:this.state.token}}><img id="logo" src={logo} alt="logo" /></Link>
         </header>
         Les règles sont les suivantes :
         <p>

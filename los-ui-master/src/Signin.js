@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -34,8 +33,7 @@ class Signin extends Component {
         if (res.data.status === "ok") {
           this.props.setSessionToken(res.data.token);
 
-          this.props.history.push({pathname:process.env.PUBLIC_URL + "/",
-          state:{ pseudo:res.data.data.name, email: res.data.data.email, token:res.data.data.token}});
+          this.props.history.push({pathname:process.env.PUBLIC_URL + "/", token:res.data.data.token});
         }
       });
   }
