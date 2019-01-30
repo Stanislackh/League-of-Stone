@@ -31,10 +31,9 @@ class Signin extends Component {
       )
       .then(res => {
         if (res.data.status === "ok") {
-          this.props.setSessionToken(res.data.token);
+          this.props.setSessionToken(res.data.data.token);
 
-          this.props.history.push({pathname:process.env.PUBLIC_URL + "/",
-          state:{ pseudo:res.data.data.name, email: res.data.data.email, token:res.data.data.token}});
+          this.props.history.push(process.env.PUBLIC_URL + "/");
         }
       });
   }
