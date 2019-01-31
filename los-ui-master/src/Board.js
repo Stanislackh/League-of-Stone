@@ -34,7 +34,7 @@ class Board extends Component {
 					})
 					console.log(this.state.champions)
 					this.randomPick(this.state.champions);
-					this.deckcards(this.state.champions);
+					this.deckcards(this.state.deck);
 				}
 				else{
 					console.log("NOK");
@@ -51,42 +51,41 @@ class Board extends Component {
 				for (let i = 0; i < 134; i++) {
 					this.state.cards
 					.push(
-					<Card id={this.state.champions[i].id}
+						this.state.champions[i].key
+					)
+				}
+					console.log(this.state.cards[0])
+
+					console.log("SUPERRANDOM");
+
+				for(let i = 0; i < 20; i++){
+
+					 let rand = Math.floor((Math.random() * 133) + 1);
+					 console.log(rand);
+						 this.state.deck.push(
+							 this.state.cards[rand]
+						 )
+					 	// );
+					}
+					console.log(this.state.deck)
+				}
+
+				/*	<Card id={this.state.champions[i].id}
 						  name={this.state.champions[i].name}
 						  img={this.state.champions[i].key + "_1.jpg"}
 						  attack={this.state.champions[i].info.attack}
 						  defense={this.state.champions[i].info.defense}
 						  key={i}
-					/>);
-					}
-					console.log(this.state.cards)
-					console.log("SUPERRANDOM");
-
-				for(let j = 0; j < 20; j++){
-
-					let rand = Math.floor((Math.random() * 133) + 1);
-						this.state.deck.push(this.state.cards[rand]);
-						console.log(this.state.deck[j]);
-						console.log(this.state.deck[j].props.img)
-					}
-				}
-
-
+					/>);*/
 
 /*tente de créer un deck*/
-	deckcards(champs) {
+	deckcards(deck) {
 		console.log("deckinit");
 		Axios.get(
-			SERVER_URL + "/match/initDeck"
+			SERVER_URL + "/match/initDeck?deck"+deck+"&token="+ this.props.token
 		)
-		.then(res =>{
-			for(let i = 0; i < this.state.deck.length; i++){
-				console.log(this.state.deck[i].props.id)
-			res.push(
-					this.state.deck[i].props.id
-			)}
-		});
-	}
+}
+
 
     render(){
         return (
