@@ -17,8 +17,12 @@ class Board extends Component {
 			champions: [],
 			cards:[],
 			deck:[],
-			token: this.props.token
+			finaldeck : [],
+			deckserv : [],
+			token: this.props.history.location.test.token
+
 		};
+		this.recupCartes();
 	}
 
 /*Essaie de récupérer les cartes*/
@@ -35,7 +39,7 @@ class Board extends Component {
 					})
 					console.log(this.state.champions)
 					this.randomPick(this.state.champions);
-					this.deckcards(this.state.deck);
+					this.deckcards(this.state.finaldeck);
 				}
 				else{
 					console.log("NOK");
@@ -52,23 +56,26 @@ class Board extends Component {
 				for (let i = 0; i < 134; i++) {
 					this.state.cards
 					.push(
-						this.state.champions[i].key
+						this.state.champions[i]
 					)
 				}
-					console.log(this.state.cards[0])
-
+				console.log(this.state.cards);
 					console.log("SUPERRANDOM");
-
 				for(let i = 0; i < 20; i++){
-
 					 let rand = Math.floor((Math.random() * 133) + 1);
-					 console.log(rand);
-						 this.state.deck.push(
-							 this.state.cards[rand]
-						 )
+					 	this.state.deck
+						.push(
+						 this.state.deck[i] = {key : this.state.cards[rand].key}
+						)
 					 	// );
 					}
-					console.log(this.state.deck)
+					this.state.deck.pop();
+
+					this.setState(
+					this.state.finaldeck={deck : this.state.deck}
+				);
+
+					console.log(this.state.finaldeck)
 				}
 
 				/*	<Card id={this.state.champions[i].id}
@@ -82,9 +89,14 @@ class Board extends Component {
 /*tente de créer un deck*/
 	deckcards(deck) {
 		console.log("deckinit");
+		console.log(this.state.finaldeck.deck);
+		var variable = JSON.stringify(this.state.finaldeck.deck);
 		Axios.get(
-			SERVER_URL + "/match/initDeck?deck"+deck +"&token="+ this.state.token
+			SERVER_URL + "/match/initDeck?deck="+ variable +"&token="+ this.state.token
 		)
+		.then(res => {
+				console.log(res.data);
+	});
 }
 
 
@@ -131,7 +143,7 @@ class Board extends Component {
                     <div id="defjoueur">
                     </div>
                     <div id="cartesjoueur">
-										<img class="card" src= "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"/>
+										<img className="card" src= "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/_1.jpg" />
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
