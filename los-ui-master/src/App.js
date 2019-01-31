@@ -22,7 +22,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={props => {
       
-      return rest.test.isConnected ? (
+      return rest.isConnected ? (
         <Component {...rest} />
       ) : (
         <Redirect to="/signin" />
@@ -92,12 +92,12 @@ class App extends Component {
             )}
           />
           />
-          <Route path="/board" component={Board} test={this.state}/>
-          <Route path="/signup" component={Signup} test={this.state}/>
-          <Route path="/regles" component={Regles} test={this.state}/>
-          <Route path="/card"  component={Card} test={this.state} />
-          <Route path="/SuppressAccount"  component={SuppressAccount} test={this.state} />
-          <PrivateRoute component={Game} test={this.state} setSessionToken={this.setSessionToken} />
+          <Route path="/board" component={Board} {...this.state}/>
+          <Route path="/signup" component={Signup} {...this.state}/>
+          <Route path="/regles" component={Regles} {...this.state}/>
+          <Route path="/card"  component={Card} {...this.state} />
+          <Route path="/SuppressAccount"  component={SuppressAccount} {...this.state} />
+          <PrivateRoute component={Game} {...this.state} setSessionToken={this.setSessionToken} />
         </Switch>
       </Router>
     );

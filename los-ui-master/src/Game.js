@@ -13,7 +13,7 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            token: this.props.test.token
+            token: this.props.token
         };
         this.deconnexion = this.deconnexion.bind(this);
     }
@@ -91,7 +91,7 @@ class Game extends Component {
             <div id="pla">
               <Link to="Board"><input className="bla" type="submit" value="Jouer!" /></Link>
               <Link to="Signin" onClick={() => this.deconnexion() }><input className="bla" type="submit" value="Deconnexion" /></Link>
-              <Link to="SuppressAccount" params={{test:"okTest"}}><input className="bla" type="submit" value="Supprimer compte" /></Link>
+              <Link to="SuppressAccount" ><input className="bla" type="submit" value="Supprimer compte" /></Link>
               <Link to="Regles"><input className="bla" type="submit" value="Règles du jeu" /></Link>
               
               <input className="bla" type="button" onClick={ ()=>this.handleUsers() } value="Get users" />
