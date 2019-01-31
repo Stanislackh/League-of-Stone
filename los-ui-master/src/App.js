@@ -92,11 +92,11 @@ class App extends Component {
             )}
           />
           />
-          <Route path="/board" component={Board} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/regles" component={Regles} />
-          <Route path="/card"  component={Card}  />
-          <Route path="/SuppressAccount"  component={SuppressAccount}  />
+          <Route path="/board" component={Board} test={this.state}/>
+          <Route path="/signup" component={Signup} test={this.state}/>
+          <Route path="/regles" component={Regles} test={this.state}/>
+          <Route path="/card"  component={Card} test={this.state} />
+          <Route path="/SuppressAccount"  component={SuppressAccount} test={this.state} />
           <PrivateRoute component={Game} test={this.state} setSessionToken={this.setSessionToken} />
         </Switch>
       </Router>
