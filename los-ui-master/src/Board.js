@@ -16,7 +16,8 @@ class Board extends Component {
 		this.state = {
 			champions: [],
 			cards:[],
-			deck:[]
+			deck:[],
+			token: this.props.token
 		};
 	}
 
@@ -82,7 +83,7 @@ class Board extends Component {
 	deckcards(deck) {
 		console.log("deckinit");
 		Axios.get(
-			SERVER_URL + "/match/initDeck?deck"+deck+"&token="+ this.props.token
+			SERVER_URL + "/match/initDeck?deck"+deck +"&token="+ this.state.token
 		)
 }
 
