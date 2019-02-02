@@ -126,7 +126,6 @@ class Board extends Component {
 			})
 		}
 
-
 		/*Recupe les matchs*/ /*FONCTIONNE YOUPI*/
 		matchGetAll(){
 			console.log("MatchGetAll")
@@ -146,10 +145,10 @@ class Board extends Component {
 		request(){
 			console.log("requestMatch")
 			Axios.get(
-				SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.matchmaking +"&token=" + this.state.token
+				SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.listeJoueurs.matchmakingId +"&token=" + this.state.token
 			)
 			.then(res =>
-					this.state.listeJoueurs = res
+					this.state.listeJoueurs = res.data.data
 			)
 			console.log(this.state.listeJoueurs)
 		}
@@ -158,7 +157,7 @@ class Board extends Component {
 		acceptRequest(){
 			console.log("AccpetRequest")
 			Axios.get(
-				SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmaking + "&token=" + this.state.token
+				SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmakingId + "&token=" + this.state.token
 			)
 		}
 
@@ -219,6 +218,10 @@ class Board extends Component {
                     </div>
 										<Modal show={this.state.show}>
 			        				<Modal.Body>
+											<button onClick={()=> this.participer()}>match</button>
+											<button onClick={()=> this.matchGetAll()}>match get all</button>
+											<button onClick={()=> this.requete()}>Send request</button>
+											<button onClick={()=> this.request()}>requestmatch</button>
 											<p>Battle request sent.</p>
 											</Modal.Body>
 			     					</Modal>
