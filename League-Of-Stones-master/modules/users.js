@@ -66,8 +66,7 @@ module.exports = {
         if (
           sess &&
           sess.connectedUser &&
-          sess.connectedUser.email == email &&
-          sess.connectedUser.password == hashPass
+          sess.connectedUser.email === email
         ) {
           losDB
             .collection('Users')

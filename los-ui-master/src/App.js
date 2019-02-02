@@ -46,13 +46,11 @@ class App extends Component {
 
 
   setSessionToken(token) {
-    console.log("in");
-    if(!this.state.isConnected) {
-      this.setState({ token, isConnected: true });
-    }else {
-      this.setState({ token: "", isConnected: false });
-    }
-    
+      this.setState({ token, isConnected: true });    
+  }
+
+  setDisconnect() {
+    this.setState({token: "", isConnected: false });
   }
 
   disconnect() {
@@ -97,7 +95,7 @@ class App extends Component {
           <Route path="/regles" component={Regles} {...this.state}/>
           <Route path="/card"  component={Card} {...this.state} />
           <Route path="/SuppressAccount"  component={SuppressAccount} {...this.state} />
-          <PrivateRoute component={Game} {...this.state} setSessionToken={this.setSessionToken} />
+          <PrivateRoute component={Game} {...this.state} setSessionToken={this.setDisconnect} />
         </Switch>
       </Router>
     );

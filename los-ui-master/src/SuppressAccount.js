@@ -28,12 +28,17 @@ class SuppressAccount extends Component {
 	    axios
 	      .get(
 	        SERVER_URL +
-	          "/users/unsubscribe?email=" +
-	          this.state.email +
-	          "&password=" +
-	          this.state.password
+	          "/users/unsubscribe?token=" +
+	          this.props.location.state.token + 
+	          "&hashPass=" +
+	          this.state.password +
+	          "&email=" +
+	          this.state.email 
 	      )
 	      .then(res => {
+	      	console.log(this.state.password);
+	      	console.log(this.state.email);
+	      	console.log(this.props.location.state.token);
 	        if (res.data.status === "ok") {
 	          this.props.history.push(process.env.PUBLIC_URL + "/");
 	        }
