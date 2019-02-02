@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "./game.css";
 import logo from "./logo.png";
 import Axios from "axios";
+import { Modal } from 'react-bootstrap';
 import { SERVER_URL } from "./consts";
 
 class Board extends Component {
@@ -14,6 +15,7 @@ class Board extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			show : false,
 			champions: [],
 			cards:[],
 			deck:[],
@@ -22,7 +24,7 @@ class Board extends Component {
 			cartes : [],
 			matchmaking : [],
 			requete : [],
-			match : [],
+			participer : [],
 			listeJoueurs :[],
 			token: this.props.history.location.test.token
 
@@ -119,16 +121,13 @@ class Board extends Component {
 				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
 			)
 			.then(res => {
-				this.state.matchmaking = res.data.data.matchmakingId;
-				this.state.requete = res.data.data.request;
-
-			console.log(this.state.matchmaking)
-			console.log(this.state.requete)
+				this.state.participer = res.data.data.request;
+			console.log(this.state.participer)
 			})
 		}
 
 
-		/*Recupe les matchs*/
+		/*Recupe les matchs*/ /*FONCTIONNE YOUPI*/
 		matchGetAll(){
 			console.log("MatchGetAll")
 			Axios.get(
@@ -137,20 +136,32 @@ class Board extends Component {
 			.then(res => {
 				console.log("res getAll")
 				//recup mail nom et matchmaking id
-			}
+				this.state.listejoueurs = res.data.data
+				}
 			)
+			console.log(this.state.listeJoueurs)
 		}
 
 		/*Refresh les demandnes de parties*/
 		request(){
 			console.log("requestMatch")
 			Axios.get(
-				SERVER_URL + "/matchmaking/request?matchmaking= " + this.state.matchmaking +"&token=" + this.state.token
+				SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.matchmaking +"&token=" + this.state.token
 			)
 			.then(res =>
 					this.state.listeJoueurs = res
 			)
+			console.log(this.state.listeJoueurs)
 		}
+
+		/*Accepte la request*/
+		acceptRequest(){
+			console.log("AccpetRequest")
+			Axios.get(
+				SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmaking + "&token=" + this.state.token
+			)
+		}
+
     render(){
         return (
         <div id="page">
@@ -206,6 +217,11 @@ class Board extends Component {
                     <div id="deckjoueur">
                         <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
                     </div>
+										<Modal show={this.state.show}>
+			        				<Modal.Body>
+											<p>Battle request sent.</p>
+											</Modal.Body>
+			     					</Modal>
                 </div>
             </div>
         );
