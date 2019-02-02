@@ -10,7 +10,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import Game from "./Game";
 import Regles from "./Regles";
-import Board from "./Board";
+import Board2 from "./Board2";
 import Card from "./Card";
 
 
@@ -55,10 +55,9 @@ class App extends Component {
             )}
           />
           />
-          <Route path="/board" component={Board} />
           <Route path="/signup" component={Signup} />
           <Route path="/regles" component={Regles} />
-          <Route path="/board"  component={Board}  />
+          <Route path="/board"  component={Board2}  />
           <Route path="/card"  component={Card}  />
           <PrivateRoute component={Game} isConnected={this.state.isConnected} />
         </Switch>

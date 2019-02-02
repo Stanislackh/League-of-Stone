@@ -99,6 +99,51 @@ h3{
     border:solid;
     border-radius:10px;
     }
+#pose{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
+#pose2{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
+#pose3{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
+#pose4{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
+#pose5{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
 #cartesadv{
     display:inline-block;
     margin-left:25px;
@@ -210,7 +255,7 @@ h3{
 	margin-left: 30px;
 }
 #cartesjoueur .card:hover {
-	margin-top: -50px;
+	/*margin-top: -50px;*/
 }
 
 
