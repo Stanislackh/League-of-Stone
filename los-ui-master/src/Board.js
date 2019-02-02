@@ -20,10 +20,16 @@ class Board extends Component {
 			finaldeck : [],
 			deckserv : [],
 			cartes : [],
+			matchmaking : [],
+			requete : [],
+			match : [],
+			listeJoueurs :[],
 			token: this.props.history.location.test.token
 
 		};
 		this.recupCartes();
+		this.participer();
+		this.matchGetAll();
 	}
 
 /*Essaie de récupérer les cartes*/
@@ -91,6 +97,7 @@ class Board extends Component {
 
 					/>)};
 					}
+
 /*tente de créer un deck*/
 	deckcards(deck) {
 		console.log("deckinit");
@@ -104,7 +111,46 @@ class Board extends Component {
 	});
 }
 
+		/*Participer a un match*/
+		participer(){
+			console.log("participer");
+			Axios
+				.get(
+				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
+			)
+			.then(res => {
+				this.state.matchmaking = res.data.data.matchmakingId;
+				this.state.requete = res.data.data.request;
 
+			console.log(this.state.matchmaking)
+			console.log(this.state.requete)
+			})
+		}
+
+
+		/*Recupe les matchs*/
+		matchGetAll(){
+			console.log("MatchGetAll")
+			Axios.get(
+				SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
+			)
+			.then(res => {
+				console.log("res getAll")
+				//recup mail nom et matchmaking id
+			}
+			)
+		}
+
+		/*Refresh les demandnes de parties*/
+		request(){
+			console.log("requestMatch")
+			Axios.get(
+				SERVER_URL + "/matchmaking/request?matchmaking= " + this.state.matchmaking +"&token=" + this.state.token
+			)
+			.then(res =>
+					this.state.listeJoueurs = res
+			)
+		}
     render(){
         return (
         <div id="page">
@@ -148,12 +194,14 @@ class Board extends Component {
                     <div id="defjoueur">
                     </div>
                     <div id="cartesjoueur">
-										<img className="card" src= "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/_1.jpg" />
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<button onClick={()=> this.participer()}>match</button>
+										<button onClick={()=> this.matchGetAll()}>match get all</button>
+										<button onClick={()=> this.request()}>requestmatch</button>
                     </div>
                     <div id="deckjoueur">
                         <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
