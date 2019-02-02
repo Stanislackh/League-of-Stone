@@ -127,16 +127,16 @@ h3{
     width:80px;
     display:inline-block;
     margin-left:25px;
-  
+
 }
 #deckadv{
-    background-image: url("cartes.png");
+    background-image: url("https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg");
     background-size: cover;
     height:120px;
     width:100px;
     display:inline-block;
     margin-left:8px;
-  
+
 }
 #cartesjoueur{
     display:inline-block;
@@ -151,7 +151,7 @@ h3{
     display:inline-block;
     margin-left:8px;
     border-radius:10px;
-  
+
 }
 
 #deckjoueur{
@@ -161,7 +161,7 @@ h3{
     width:100px;*/
     display:inline-block;
     margin-left:50px;
-  
+
 }
 #plateau{
     border-radius:15px;
@@ -212,5 +212,3 @@ h3{
 #cartesjoueur .card:hover {
 	margin-top: -50px;
 }
-
-

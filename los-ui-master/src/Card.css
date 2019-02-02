@@ -1,6 +1,6 @@
 
 
-.flip {
+ .flip {
     -webkit-perspective: 800px;
     width: 400px;
     height: 200px;
@@ -39,4 +39,4 @@
     background: black;
     color: white;
     cursor: pointer;
-}
+} 
