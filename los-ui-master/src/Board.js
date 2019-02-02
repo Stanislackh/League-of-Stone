@@ -28,6 +28,8 @@ class Board extends Component {
 
 		};
 		this.recupCartes();
+		this.participer();
+		this.matchGetAll();
 	}
 
 /*Essaie de récupérer les cartes*/
@@ -119,9 +121,9 @@ class Board extends Component {
 			.then(res => {
 				this.state.matchmaking = res.data.data.matchmakingId;
 				this.state.requete = res.data.data.request;
+
 			console.log(this.state.matchmaking)
 			console.log(this.state.requete)
-			console.log(res)
 			})
 		}
 
@@ -143,7 +145,7 @@ class Board extends Component {
 		request(){
 			console.log("requestMatch")
 			Axios.get(
-				SERVER_URL + "/matchmaking/request?matchmaking= " + this.state.matchmakingId +"&token=" + this.state.token
+				SERVER_URL + "/matchmaking/request?matchmaking= " + this.state.matchmaking +"&token=" + this.state.token
 			)
 			.then(res =>
 					this.state.listeJoueurs = res
