@@ -19,6 +19,7 @@ class Board extends Component {
 			deck:[],
 			finaldeck : [],
 			deckserv : [],
+			cartes : [],
 			token: this.props.history.location.test.token
 
 		};
@@ -40,12 +41,11 @@ class Board extends Component {
 					console.log(this.state.champions)
 					this.randomPick(this.state.champions);
 					this.deckcards(this.state.finaldeck);
+					this.creerCarte();
 				}
 				else{
 					console.log("NOK");
 				}
-				//this.state.champions.push({"id": res.data.id, "name": res.data.name, "img": res.data.image.sprite, "attack":res.data.stats.attack , "defense":res.data.stats.defense });
-				//console.log(res);
 			});
 		}
 
@@ -67,7 +67,6 @@ class Board extends Component {
 						.push(
 						 this.state.deck[i] = {key : this.state.cards[rand].key}
 						)
-					 	// );
 					}
 					this.state.deck.pop();
 
@@ -78,21 +77,27 @@ class Board extends Component {
 					console.log(this.state.finaldeck)
 				}
 
-				/*	<Card id={this.state.champions[i].id}
-						  name={this.state.champions[i].name}
-						  img={this.state.champions[i].key + "_1.jpg"}
-						  attack={this.state.champions[i].info.attack}
-						  defense={this.state.champions[i].info.defense}
-						  key={i}
-					/>);*/
+				creerCarte(){
+				console.log("creerCarte");
+				for(let i = 0; i < this.state.finaldeck.lenght(); i++){
+						this.state.cartes.push(
 
+					<Card id={this.state.finaldeck[i].id}
+						  name={this.state.finaldeck[i].name}
+						  img={this.state.finaldeck[i].key + "_1.jpg"}
+						  attack={this.state.finaldeck[i].info.attack}
+						  defense={this.state.finaldeck[i].info.defense}
+						  key={i}
+
+					/>)};
+					}
 /*tente de créer un deck*/
 	deckcards(deck) {
 		console.log("deckinit");
 		console.log(this.state.finaldeck.deck);
-		var variable = JSON.stringify(this.state.finaldeck.deck);
+		var jsondeck = JSON.stringify(this.state.finaldeck.deck);
 		Axios.get(
-			SERVER_URL + "/match/initDeck?deck="+ variable +"&token="+ this.state.token
+			SERVER_URL + "/match/initDeck?deck="+ jsondeck +"&token="+ this.state.token
 		)
 		.then(res => {
 				console.log(res.data);
@@ -103,8 +108,8 @@ class Board extends Component {
     render(){
         return (
         <div id="page">
-                <div id="adversaire">
-                    <div id="deckadv">
+                <div id="adversaire" >
+                    <div id="deckadv" >
                     </div>
                     <div id="cartesadv">
                     </div>
@@ -149,10 +154,9 @@ class Board extends Component {
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<button onClick={()=>this.recupCartes()}> click 1 </button>
                     </div>
                     <div id="deckjoueur">
-                        <img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+                        <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
                     </div>
                 </div>
             </div>
