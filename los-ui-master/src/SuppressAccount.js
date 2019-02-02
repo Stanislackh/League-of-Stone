@@ -36,9 +36,6 @@ class SuppressAccount extends Component {
 	          this.state.email 
 	      )
 	      .then(res => {
-	      	console.log(this.state.password);
-	      	console.log(this.state.email);
-	      	console.log(this.props.location.state.token);
 	        if (res.data.status === "ok") {
 	          this.props.history.push(process.env.PUBLIC_URL + "/");
 	        }
