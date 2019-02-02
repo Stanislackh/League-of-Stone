@@ -55,11 +55,11 @@ class App extends Component {
             )}
           />
           />
+          <Route path="/board" component={Board}  {...this.state}/>
           <Route path="/signup" component={Signup} />
           <Route path="/regles" component={Regles} />
-          <Route path="/board"  component={Board2}  />
           <Route path="/card"  component={Card}  />
-          <PrivateRoute component={Game} isConnected={this.state.isConnected} />
+          <PrivateRoute component={Game} {...this.state} />
         </Switch>
       </Router>
     );

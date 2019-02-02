@@ -5,161 +5,161 @@ import "./App.css";
 import { Link } from "react-router-dom";
 import "./game.css";
 import logo from "./logo.png";
-import * as jquery from "jquery";
-import "jquery-ui-dist/jquery-ui";
-import $ from "jquery";
+import Axios from "axios";
+import { SERVER_URL } from "./consts";
+
 class Board extends Component {
 
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			errsor: null,
-			isLoaded: false,
 			champions: [],
+			cards:[],
+			deck:[],
+			finaldeck : [],
+			deckserv : [],
+			cartes : [],
+			matchmaking : [],
+			requete : [],
+			match : [],
+			listeJoueurs :[],
+			token: this.props.history.location.test.token
+
 		};
+		this.recupCartes();
+		this.participer();
+		this.matchGetAll();
 	}
 
-
-	randomPick(champs, number) {
-		let rChamps = [];
-		for (let i = 0; i < number ; i++) {
-			let elem = champs.splice(Math.floor(Math.random() * champs.length), 1)[0];
-			rChamps.push({"id": elem.key, "name": elem.name, "img": elem.key + "_0.jpg", "attack":elem.info.attack , "defense":elem.info.defense });
-		}
-
-		return rChamps;
-	}
-
-	deckcards(champs) {
-		let cards = [];
-		for (let i = 0; i < 120; i++) {
-			cards.push(
-				<Card id={champs[i].id}
-					  name={champs[i].name}
-					  img={champs[i].img}
-					  attack={champs[i].attack}
-					  defense={champs[i].defense}
-					  key={i}
-
-				/>);
-		}
-		return cards;
-	}
-
-
-	shuffle(a) {
-		for (let i = a.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[a[i], a[j]] = [a[j], a[i]];
-		}
-		return a;
-	}
-
-
-
-
-	componentWillReceiveProps(nextProps) {
-		fetch("champions-info-image-stats-sort.json")
-			.then(res => res.json())
-			.then(
-				(result) => {
-					let rChamps = this.randomPick(result, nextProps.number);
-					let champions = this.shuffle(rChamps);
+/*Essaie de récupérer les cartes*/
+	recupCartes(){
+		console.log("RecupCarte");
+			Axios
+				.get(
+				SERVER_URL + "/cards/getAll"
+			)
+			.then(res => {
+				if(res.data.status === "ok"){
 					this.setState({
-						champions: champions
-					});
-				},
-				(error) => {
-					this.setState({
-						isLoaded: true,
-						error
-					});
+						champions : res.data.data
+					})
+					console.log(this.state.champions)
+					this.randomPick(this.state.champions);
+					this.deckcards(this.state.finaldeck);
+					this.creerCarte();
 				}
-			);
-
-	}
-
-	componentDidMount() {
-		fetch("champions-info-image-stats-sort.json")
-			.then(res => res.json())
-			.then(
-				(result) => {
-					let rChamps = this.randomPick(result, this.props.number);
-					let champions = this.shuffle(rChamps);
-					this.setState({
-						isLoaded: true,
-						champions: champions
-					});
-				},
-				(error) => {
-					this.setState({
-						isLoaded: true,
-						error
-					});
+				else{
+					console.log("NOK");
 				}
-			);
-
-	}
-
-
-	render() {
-
-		const {error, isLoaded, champions} = this.state;
-
-		if (error) {
-			return <div>Error: {error.message}</div>;
-		} else if (!isLoaded) {
-			return <div>Loading...</div>;
-		} else {
-			let cards = this.deckcards(champions);
-			return (
-				<section className="row" classID="board">
-					{cards}
-				</section>
-			);
+			});
 		}
-	}
+
+		/*Pick aléatoire et constitue le deck de 20 cartes*/
+			randomPick(champs) {
+				console.log("random");
+
+				for (let i = 0; i < 134; i++) {
+					this.state.cards
+					.push(
+						this.state.champions[i]
+					)
+				}
+				console.log(this.state.cards);
+					console.log("SUPERRANDOM");
+				for(let i = 0; i < 20; i++){
+					 let rand = Math.floor((Math.random() * 133) + 1);
+					 	this.state.deck
+						.push(
+						 this.state.deck[i] = {key : this.state.cards[rand].key}
+						)
+					}
+					this.state.deck.pop();
+
+					this.setState(
+					this.state.finaldeck={deck : this.state.deck}
+				);
+
+					console.log(this.state.finaldeck)
+				}
+
+				creerCarte(){
+				console.log("creerCarte");
+				for(let i = 0; i < this.state.finaldeck.lenght(); i++){
+						this.state.cartes.push(
+
+					<Card id={this.state.finaldeck[i].id}
+						  name={this.state.finaldeck[i].name}
+						  img={this.state.finaldeck[i].key + "_1.jpg"}
+						  attack={this.state.finaldeck[i].info.attack}
+						  defense={this.state.finaldeck[i].info.defense}
+						  key={i}
+
+					/>)};
+					}
+
+/*tente de créer un deck*/
+	deckcards(deck) {
+		console.log("deckinit");
+		console.log(this.state.finaldeck.deck);
+		var jsondeck = JSON.stringify(this.state.finaldeck.deck);
+		Axios.get(
+			SERVER_URL + "/match/initDeck?deck="+ jsondeck +"&token="+ this.state.token
+		)
+		.then(res => {
+				console.log(res.data);
+	});
 }
 
+		/*Participer a un match*/
+		participer(){
+			console.log("participer");
+			Axios
+				.get(
+				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
+			)
+			.then(res => {
+				this.state.matchmaking = res.data.data.matchmakingId;
+				this.state.requete = res.data.data.request;
 
-function allowDrop(ev) {
-    ev.preventDefault();
-  }
-  
-function drag(ev) {
-    ev.dataTransfer.setData("image/svg+xml", ev.target.class);
-  }
-  
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("image/svg+xml");
-    ev.target.appendChild(document.getElementByClassName(data));
-  }
+			console.log(this.state.matchmaking)
+			console.log(this.state.requete)
+			})
+		}
 
-class Board extends Component {
-    allowDrop(ev) {
-        ev.preventDefault();
-      }
-      
-    drag(ev) {
-        ev.dataTransfer.setData("image/svg+xml", ev.target.class);
-      }
-      
-    drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("image/svg+xml");
-        ev.target.appendChild(document.getElementByClassName(data));
-      }
+
+		/*Recupe les matchs*/
+		matchGetAll(){
+			console.log("MatchGetAll")
+			Axios.get(
+				SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
+			)
+			.then(res => {
+				console.log("res getAll")
+				//recup mail nom et matchmaking id
+			}
+			)
+		}
+
+		/*Refresh les demandnes de parties*/
+		request(){
+			console.log("requestMatch")
+			Axios.get(
+				SERVER_URL + "/matchmaking/request?matchmaking= " + this.state.matchmaking +"&token=" + this.state.token
+			)
+			.then(res =>
+					this.state.listeJoueurs = res
+			)
+		}
     render(){
-        return (                    
+        return (
         <div id="page">
-                <div id="adversaire">
-                    <div id="deckadv">
+                <div id="adversaire" >
+                    <div id="deckadv" >
                     </div>
                     <div id="cartesadv">
                     </div>
-                    <div id="defadv">                        
+                    <div id="defadv">
                     </div>
                 </div>
                 <div id="plateau">
@@ -167,45 +167,48 @@ class Board extends Component {
                         <div className="pose">
                         </div>
                         <div className="pose">
-                        </div>                            
-                        <div className="pose">
                         </div>
                         <div className="pose">
                         </div>
                         <div className="pose">
                         </div>
-                    </div>  
+                        <div className="pose">
+                        </div>
+                    </div>
                     <div id="lp">
-                    </div>                     
+                    </div>
                     <div id="jeujoueur">
-                        <div className="pose"> 
-                        </div>
                         <div className="pose">
                         </div>
                         <div className="pose">
                         </div>
-                        <div className="pose">                            
+                        <div className="pose">
+                        </div>
+                        <div className="pose">
                         </div>
                         <div className="pose">
                         </div>
                     </div>
                 </div>
                 <div id="joueur">
-                    <div id="defjoueur">                        
+                    <div id="defjoueur">
                     </div>
                     <div id="cartesjoueur">
-                        <object draggable="true" class="card" type="image/svg+xml" data="demo.svg">🂠</object>
-		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
-		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
-		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
-		                <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<button onClick={()=> this.participer()}>match</button>
+										<button onClick={()=> this.matchGetAll()}>match get all</button>
+										<button onClick={()=> this.request()}>requestmatch</button>
                     </div>
                     <div id="deckjoueur">
-                        <object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+                        <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
                     </div>
                 </div>
             </div>
         );
     }
-}
+	}
 export default Board;
