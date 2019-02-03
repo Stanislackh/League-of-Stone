@@ -141,14 +141,14 @@ class Board extends Component {
 				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
 			)
 			.then(res => {
-				this.state.participer = res.data.data.request;
+				this.state.participer = res.data.data.matchmakingId;
 			});
 						console.log(this.state.participer)
 		}
 
 		/*Refresh les demandes de parties*/
 		request(){
-			console.log("request")
+			console.log("request");
 			Axios.get(
 				SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.matchmaking[0] +"&token=" + this.state.token
 			)

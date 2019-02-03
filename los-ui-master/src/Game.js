@@ -51,7 +51,7 @@ class Game extends Component {
             <div id="pla">
               <Link to={{pathname:"Board", test:{...this.state}}}>< input className="bla" type="submit" value="Jouer!" /></Link>
               <Link to="Signin" onClick={this.deconnexion}><input className="bla" type="submit" value="Deconnexion" /></Link>
-              <input className="bla" type="button" value="Supprimer compte" />
+              <Link to={{pathname:"SuppressAccount", state:{...this.state}}} ><input className="bla" type="submit" value="Supprimer compte" /></Link>
               <Link to="Regles" test={this.state.token}><input className="bla" type="submit" value="Règles du jeu" /></Link>
             </div>
         </div>
