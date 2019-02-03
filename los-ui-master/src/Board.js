@@ -33,27 +33,81 @@ class Board extends Component {
 		this.matchGetAll();
 	}
 
-/*Essaie de récupérer les cartes*/
-	recupCartes(){
-		console.log("RecupCarte");
-			Axios
-				.get(
-				SERVER_URL + "/cards/getAll"
-			)
-			.then(res => {
-				if(res.data.status === "ok"){
-					this.setState({
-						champions : res.data.data
-					})
-					console.log(this.state.champions)
-					this.randomPick(this.state.champions);
-					this.deckcards(this.state.finaldeck);
-					this.creerCarte();
-				}
-				else{
-					console.log("NOK");
-				}
-			});
+	allowDrop(ev) {
+		ev.preventDefault();
+	}
+
+	drag(ev) {
+		ev.dataTransfer.setData("image/svg+xml", ev.target.class);
+	}
+
+	drop(ev) {
+		ev.preventDefault();
+		var data = ev.dataTransfer.getData("image/svg+xml");
+		ev.target.appendChild(document.getElementByClassName(data));
+	}
+	render(){
+		return (
+			<div id="page">
+				<div id="adversaire">
+					<div id="deckadv">
+					</div>
+					<div id="cartesadv">
+					</div>
+					<div id="defadv">
+					</div>
+				</div>
+				<div id="plateau">
+					<div id="jeuadv">
+						<div className="pose">
+						</div>
+						<div className="pose">
+						</div>
+						<div className="pose">
+						</div>
+						<div className="pose">
+						</div>
+						<div className="pose">
+						</div>
+					</div>
+					<div id="lp">
+					</div>
+					<div id="jeujoueur">
+						<div className="pose">
+						</div>
+						<div className="pose">
+						</div>
+						<div className="pose">
+						</div>
+						<div className="pose">
+						</div>
+						<div className="pose">
+						</div>
+					</div>
+				</div>
+				<div id="joueur">
+					<div id="defjoueur">
+					</div>
+					<div id="cartesjoueur">
+						<object draggable="true" class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+						<object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+						<object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+						<object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+						<object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+					</div>
+					<div id="deckjoueur">
+						<object class="card" type="image/svg+xml" data="demo.svg">🂠</object>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	randomPick(champs, number) {
+		let rChamps = [];
+		for (let i = 0; i < number ; i++) {
+			let elem = champs.splice(Math.floor(Math.random() * champs.length), 1)[0];
+			rChamps.push({"id": elem.key, "name": elem.name, "img": elem.key + "_0.jpg", "attack":elem.info.attack , "defense":elem.info.defense });
 		}
 
 		/*Pick aléatoire et constitue le deck de 20 cartes*/
@@ -177,74 +231,18 @@ class Board extends Component {
 		}
 
 
-    render(){
-        return (
-        <div id="page">
-                <div id="adversaire" >
-                    <div id="deckadv" >
-                    </div>
-                    <div id="cartesadv">
-                    </div>
-                    <div id="defadv">
-                    </div>
-                </div>
-                <div id="plateau">
-                    <div id="jeuadv">
-                        <div className="pose">
-                        </div>
-                        <div className="pose">
-                        </div>
-                        <div className="pose">
-                        </div>
-                        <div className="pose">
-                        </div>
-                        <div className="pose">
-                        </div>
-                    </div>
-                    <div id="lp">
-                    </div>
-                    <div id="jeujoueur">
-                        <div className="pose">
-                        </div>
-                        <div className="pose">
-                        </div>
-                        <div className="pose">
-                        </div>
-                        <div className="pose">
-                        </div>
-                        <div className="pose">
-                        </div>
-                    </div>
-                </div>
-                <div id="joueur">
-                    <div id="defjoueur">
-                    </div>
-                    <div id="cartesjoueur">
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-                    </div>
-                    <div id="deckjoueur">
-                        <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
-                    </div>
+function allowDrop(ev) {
+    ev.preventDefault();
+  }
+  
+function drag(ev) {
+    ev.dataTransfer.setData("image/svg+xml", ev.target.class);
+  }
+  
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("image/svg+xml");
+    ev.target.appendChild(document.getElementByClassName(data));
+  }
 
-										<Modal show={this.state.show = true}>
-			        				<Modal.Body>
-											<button onClick={()=> this.matchGetAll()}>Liste Participants</button>
-											<button onClick={()=> this.participer()}>Participer</button>
-											<button onClick={()=> this.choix()}>Choix Adversaire</button>
-											<button onClick={()=> this.request()}>Refresh Liste Adversaires</button>
-											<button onClick={()=> this.acceptRequest()}>AcceptRequest</button>
-											<ul>
-											{(this.state.matchmaking || []).map((joueur,index) => (<li key={index}></li>))}
-											</ul>
-											</Modal.Body>
-			     					</Modal>
-                </div>
-            </div>
-        );
-    }
-	}
 export default Board;

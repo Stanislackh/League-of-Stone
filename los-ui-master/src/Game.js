@@ -29,7 +29,7 @@ class Game extends Component {
             });
     }
 
-    render() {
+    /*render() {
         return (
             <div className="App">
                 <header className="App-header">
@@ -40,7 +40,7 @@ class Game extends Component {
                 </header>
             </div>
         );
-    }
+    }*/
   render() {
     return (
       <div id="accueil">
