@@ -30,7 +30,6 @@ class Board extends Component {
 
 		};
 		this.recupCartes();
-		this.participer();
 		this.matchGetAll();
 	}
 
@@ -113,19 +112,6 @@ class Board extends Component {
 	});
 }
 
-		/*Participer a un match*/
-		participer(){
-			console.log("participer");
-			Axios
-				.get(
-				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
-			)
-			.then(res => {
-				this.state.participer = res.data.data.request;
-			console.log(this.state.participer)
-			})
-		}
-
 		/*Recupe les matchs*/ /*FONCTIONNE YOUPI*/
 		matchGetAll(){
 			console.log("MatchGetAll")
@@ -133,33 +119,63 @@ class Board extends Component {
 				SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
 			)
 			.then(res => {
-				console.log("res getAll")
-				//recup mail nom et matchmaking id
-				this.state.listejoueurs = res.data.data
-				}
-			)
-			console.log(this.state.listeJoueurs)
+					this.state.listeJoueurs = res.data.data
+		});
+			console.log(this.state.listeJoueurs);
 		}
 
-		/*Refresh les demandnes de parties*/
+		/*Choisir a qui envoyer la requete*/
+		choix(){
+			console.log("choix du joueur")
+			for(let i = 0; i < 3; i++){
+				this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId
+			)}
+			console.log(this.state.matchmaking);
+		}
+
+		/*Participer a un match*/
+		participer(){
+			console.log("liste des requetes");
+			Axios
+				.get(
+				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
+			)
+			.then(res => {
+				this.state.participer = res.data.data.request;
+			});
+						console.log(this.state.participer)
+		}
+
+		/*Refresh les demandes de parties*/
 		request(){
-			console.log("requestMatch")
+			console.log("request")
 			Axios.get(
-				SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.listeJoueurs.matchmakingId +"&token=" + this.state.token
+				SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.matchmaking[0] +"&token=" + this.state.token
 			)
 			.then(res =>
-					this.state.listeJoueurs = res.data.data
+					this.state.listeJoueurs = res.data.data.request
 			)
 			console.log(this.state.listeJoueurs)
 		}
 
 		/*Accepte la request*/
 		acceptRequest(){
-			console.log("AccpetRequest")
+			console.log("AcceptRequest")
 			Axios.get(
-				SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmakingId + "&token=" + this.state.token
+				SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmaking[0] + "&token=" + this.state.token
 			)
+			.then(res => {
+				console.log("res du accept request");
+				console.log(res);
+				this.props.history.push({
+					state :{J1 : res.data.player1,
+									J2 : res.data.player2,
+									token : this.state.token}
+				}
+			);
+			})
 		}
+
 
     render(){
         return (
@@ -209,20 +225,21 @@ class Board extends Component {
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<button onClick={()=> this.participer()}>match</button>
-										<button onClick={()=> this.matchGetAll()}>match get all</button>
-										<button onClick={()=> this.request()}>requestmatch</button>
                     </div>
                     <div id="deckjoueur">
                         <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
                     </div>
-										<Modal show={this.state.show}>
+
+										<Modal show={this.state.show = true}>
 			        				<Modal.Body>
-											<button onClick={()=> this.participer()}>match</button>
-											<button onClick={()=> this.matchGetAll()}>match get all</button>
-											<button onClick={()=> this.requete()}>Send request</button>
-											<button onClick={()=> this.request()}>requestmatch</button>
-											<p>Battle request sent.</p>
+											<button onClick={()=> this.matchGetAll()}>Liste Participants</button>
+											<button onClick={()=> this.participer()}>Participer</button>
+											<button onClick={()=> this.choix()}>Choix Adversaire</button>
+											<button onClick={()=> this.request()}>Refresh Liste Adversaires</button>
+											<button onClick={()=> this.acceptRequest()}>AcceptRequest</button>
+											<ul>
+											{(this.state.matchmaking || []).map((joueur,index) => (<li key={index}></li>))}
+											</ul>
 											</Modal.Body>
 			     					</Modal>
                 </div>
