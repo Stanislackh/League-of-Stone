@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -50,7 +49,11 @@ class Signin extends Component {
       <div id="accueil">
       <header>
         <h1>League of Stones</h1>
+<<<<<<< HEAD
       < h3>Version UT2J</h3>
+=======
+        <h3>Version UT2J</h3>
+>>>>>>> parent of e7732a1... ?? signin
       </header>
       <div>
         <form onSubmit={this.handleSubmit}>
