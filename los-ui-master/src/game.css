@@ -99,6 +99,51 @@ h3{
     border:solid;
     border-radius:10px;
     }
+#pose{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
+#pose2{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
+#pose3{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
+#pose4{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
+#pose5{
+    display:inline-block;
+    margin-left:27px;
+    margin-right:10px;
+    height:100px;
+    width:80px;
+    border:solid;
+    border-radius:10px;
+}
 #cartesadv{
     display:inline-block;
     margin-left:25px;
@@ -127,16 +172,16 @@ h3{
     width:80px;
     display:inline-block;
     margin-left:25px;
-  
+
 }
 #deckadv{
-    background-image: url("cartes.png");
+    background-image: url("https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg");
     background-size: cover;
     height:120px;
     width:100px;
     display:inline-block;
     margin-left:8px;
-  
+
 }
 #cartesjoueur{
     display:inline-block;
@@ -151,7 +196,7 @@ h3{
     display:inline-block;
     margin-left:8px;
     border-radius:10px;
-  
+
 }
 
 #deckjoueur{
@@ -161,7 +206,7 @@ h3{
     width:100px;*/
     display:inline-block;
     margin-left:50px;
-  
+
 }
 #plateau{
     border-radius:15px;
@@ -210,7 +255,5 @@ h3{
 	margin-left: 30px;
 }
 #cartesjoueur .card:hover {
-	margin-top: -50px;
+	/*margin-top: -50px;*/
 }
-
-

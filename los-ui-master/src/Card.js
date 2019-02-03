@@ -4,6 +4,7 @@ import "./Card.css";
 class Card extends Component {
 	constructor(props) {
 		super(props);
+		console.log(this.props)
 	}
 	render() {
 
@@ -17,8 +18,6 @@ class Card extends Component {
 						<div className="card-body">
 							<p className="card-text">{this.props.name} attack : {this.props.attack}  defense : {this.props.defense}</p>
 						</div>
-
-
 				</div>
 			</div>
 
