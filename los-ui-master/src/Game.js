@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./App.css";
 import {Link} from "react-router-dom";
 import axios from "axios";
@@ -13,6 +13,20 @@ class Game extends Component {
             token: this.props.token
         };
         this.deconnexion = this.deconnexion.bind(this);
+        this.accountSupr = this.accountSupr.bind(this);
+    }
+
+    accountSupr(e){
+        e.preventDefault();
+        axios
+            .get(SERVER_URL + "/users/unsubscribe?email=" + this.state.email +
+                "&password=" + this.state.passw
+            ).then(res=>{
+                if (res.data.status === "ok"){
+                    console.log("a");
+                    this.props.history.push(process.env.PUBLIC_URL + "/signin");
+                }
+        } );
     }
 
     deconnexion(e) {
@@ -29,7 +43,7 @@ class Game extends Component {
             });
     }
 
-    render() {
+    /*render() {
         return (
             <div className="App">
                 <header className="App-header">
@@ -40,7 +54,7 @@ class Game extends Component {
                 </header>
             </div>
         );
-    }
+    }*/
   render() {
     return (
       <div id="accueil">
@@ -51,7 +65,7 @@ class Game extends Component {
             <div id="pla">
               <Link to={{pathname:"Board", test:{...this.state}}}>< input className="bla" type="submit" value="Jouer!" /></Link>
               <Link to="Signin" onClick={this.deconnexion}><input className="bla" type="submit" value="Deconnexion" /></Link>
-              <input className="bla" type="button" value="Supprimer compte" />
+              <Link to={{pathname:"SuppressAccount", state:{...this.state}}} ><input className="bla" type="submit" value="Supprimer compte" /></Link>
               <Link to="Regles" test={this.state.token}><input className="bla" type="submit" value="Règles du jeu" /></Link>
             </div>
         </div>

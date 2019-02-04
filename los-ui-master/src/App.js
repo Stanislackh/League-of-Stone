@@ -11,6 +11,7 @@ import Signup from "./Signup";
 import Game from "./Game";
 import Regles from "./Regles";
 import Board from "./Board";
+import SuppressAccount from "./SuppressAccount";
 import Card from "./Card";
 
 
@@ -55,11 +56,12 @@ class App extends Component {
             )}
           />
           />
-          <Route path="/board" component={Board}  {...this.state}/>
+          <PrivateRoute path="/board" component={Board}  {...this.state}/>
           <Route path="/signup" component={Signup} />
           <Route path="/regles" component={Regles} />
           <Route path="/card"  component={Card}  />
-          <PrivateRoute component={Game} {...this.state} />
+          <Route path="/SuppressAccount" component={SuppressAccount} {...this.state} />
+          <PrivateRoute component={Game} {...this.state} setSessionToken={this.setDisconnect} />
         </Switch>
       </Router>
     );
