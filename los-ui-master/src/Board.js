@@ -26,6 +26,8 @@ class Board extends Component {
 			requete : [],
 			participer : [],
 			listeJoueurs :[],
+			player1 : [],
+			player2 : [],
 			token: this.props.history.location.test.token
 
 		};
@@ -183,10 +185,12 @@ class Board extends Component {
 	      .get(
 	      SERVER_URL + "/match/getMatch?token=" + this.state.token
 	    )
-	    .then(res =>
-	      this.state.match = res.status
-	    )
-	    console.log(this.state.match)
+	    .then(res => {
+				this.state.player1 = res.player1;
+				this.state.player2 = res.player2
+	    });
+	    console.log(this.state.player1);
+			console.log(this.state.player2);
 	  }
 
 	/*Pioche une carte*/
@@ -195,9 +199,9 @@ class Board extends Component {
 	      .get(
 	      SERVER_URL + "/match/pickCard?token=" + this.state.token
 	    )
-	    .then(res =>
+	    .then(res => {
 	      this.state.match = res
-	    )
+	    })
 	  }
 
 	/*Joue une carte*/
@@ -206,6 +210,9 @@ class Board extends Component {
 	    .get(
 	      SERVER_URL + "/match/playCard?card="+ this.state.card.key + "&token=" + this.state.token
 	    )
+			.then(res=> {
+	      this.state.match = res
+			})
 	  }
 
 	/*Attaque*/
@@ -214,8 +221,9 @@ class Board extends Component {
 	    .get(
 	      SERVER_URL + "/match/attack?card="+ this.state.card.key + "&ennemmyCard=" + this.state.ennemycard.key + "?token=" + this.state.token
 	    )
-	    .then(res=>
-	      this.state.match = res)
+	    .then(res => {
+	      this.state.match = res
+			})
 	  }
 
 	/*Attaque directe*/
@@ -224,8 +232,9 @@ class Board extends Component {
 	    .get(
 	      SERVER_URL + "/match/attackPlayer?card="+ this.state.card.key + "&token=" + this.state.token
 	    )
-	    .then(res=>
-	      this.state.match = res)
+	    .then(res => {
+	      this.state.match = res
+			})
 	  }
 
 	/*Met fin au tour*/
@@ -234,8 +243,9 @@ class Board extends Component {
 	    .get(
 	      SERVER_URL + "/match/endTurn"+ this.state.card.key + "&token=" + this.state.token
 	    )
-	    .then(res=>
-	      this.state.match = res)
+	    .then(res => {
+	      this.state.match = res
+			})
 	  }
 
     render(){
