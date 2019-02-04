@@ -50,7 +50,7 @@ class Signin extends Component {
       <div id="accueil">
       <header>
         <h1>League of Stones</h1>
-      < h3>Version UT2J</h3>
+      <h3>Version UT2J</h3>
       </header>
       <div>
         <form onSubmit={this.handleSubmit}>

@@ -26,14 +26,13 @@ class Board extends Component {
 			requete : [],
 			participer : [],
 			listeJoueurs :[],
-			token: this.props.history.location.test.token
-
+			token: this.props.location.test
 		};
 		this.recupCartes();
 		this.matchGetAll();
 	}
 
-/*Essaie de récupérer les cartes*/
+	/*Essaie de récupérer les cartes*/
 	recupCartes(){
 		console.log("RecupCarte");
 			Axios
@@ -56,50 +55,50 @@ class Board extends Component {
 			});
 		}
 
-		/*Pick aléatoire et constitue le deck de 20 cartes*/
-			randomPick(champs) {
-				console.log("random");
+	/*Pick aléatoire et constitue le deck de 20 cartes*/
+	randomPick(champs) {
+		console.log("random");
 
-				for (let i = 0; i < 134; i++) {
-					this.state.cards
-					.push(
-						this.state.champions[i]
-					)
-				}
-				console.log(this.state.cards);
-					console.log("SUPERRANDOM");
-				for(let i = 0; i < 20; i++){
-					 let rand = Math.floor((Math.random() * 133) + 1);
-					 	this.state.deck
-						.push(
-						 this.state.deck[i] = {key : this.state.cards[rand].key}
-						)
-					}
-					this.state.deck.pop();
+		for (let i = 0; i < 134; i++) {
+			this.state.cards
+			.push(
+				this.state.champions[i]
+			)
+		}
+		console.log(this.state.cards);
+			console.log("SUPERRANDOM");
+		for(let i = 0; i < 20; i++){
+			 let rand = Math.floor((Math.random() * 133) + 1);
+			 	this.state.deck
+				.push(
+				 this.state.deck[i] = {key : this.state.cards[rand].key}
+				)
+			}
+			this.state.deck.pop();
 
-					this.setState(
-					this.state.finaldeck={deck : this.state.deck}
-				);
+			this.setState(
+			this.state.finaldeck={deck : this.state.deck}
+		);
 
-					console.log(this.state.finaldeck)
-				}
+			console.log(this.state.finaldeck)
+		}
 
-				creerCarte(){
-				console.log("creerCarte");
-				for(let i = 0; i < this.state.finaldeck.lenght(); i++){
-						this.state.cartes.push(
+	creerCarte(){
+	console.log("creerCarte");
+	for(let i = 0; i < this.state.finaldeck.lenght(); i++){
+			this.state.cartes.push(
 
-					<Card id={this.state.finaldeck[i].id}
-						  name={this.state.finaldeck[i].name}
-						  img={this.state.finaldeck[i].key + "_1.jpg"}
-						  attack={this.state.finaldeck[i].info.attack}
-						  defense={this.state.finaldeck[i].info.defense}
-						  key={i}
+		<Card id={this.state.finaldeck[i].id}
+			  name={this.state.finaldeck[i].name}
+			  img={this.state.finaldeck[i].key + "_1.jpg"}
+			  attack={this.state.finaldeck[i].info.attack}
+			  defense={this.state.finaldeck[i].info.defense}
+			  key={i}
 
-					/>)};
-					}
+		/>)};
+		}
 
-/*tente de créer un deck*/
+	/*tente de créer un deck*/
 	deckcards(deck) {
 		console.log("deckinit");
 		console.log(this.state.finaldeck.deck);
@@ -109,72 +108,74 @@ class Board extends Component {
 		)
 		.then(res => {
 				console.log(res.data);
-	});
-}
-
-		/*Recupe les matchs*/ /*FONCTIONNE YOUPI*/
-		matchGetAll(){
-			console.log("MatchGetAll")
-			Axios.get(
-				SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
-			)
-			.then(res => {
-					this.state.listeJoueurs = res.data.data
 		});
-			console.log(this.state.listeJoueurs);
-		}
+	}
 
-		/*Choisir a qui envoyer la requete*/
-		choix(){
-			console.log("choix du joueur")
-			for(let i = 0; i < 3; i++){
-				this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId
-			)}
-			console.log(this.state.matchmaking);
-		}
+	/*Recupe les matchs*/ /*FONCTIONNE YOUPI*/
+	matchGetAll(){
+		console.log("MatchGetAll")
+		Axios.get(
+			SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
+		)
+		.then(res => {
+				this.state.listeJoueurs = res.data.data
+	});
+		console.log(this.state.listeJoueurs);
+	}
 
-		/*Participer a un match*/
-		participer(){
-			console.log("liste des requetes");
-			Axios
-				.get(
-				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
-			)
-			.then(res => {
-				this.state.participer = res.data.data.request;
-			});
-						console.log(this.state.participer)
-		}
+	/*Choisir a qui envoyer la requete*/
+	choix(){
+		console.log("choix du joueur")
+		for(let i = 0; i < 3; i++){
+			this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId
+		)}
+		console.log(this.state.matchmaking);
+	}
 
-		/*Refresh les demandes de parties*/
-		request(){
-			console.log("request")
-			Axios.get(
-				SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.matchmaking[0] +"&token=" + this.state.token
-			)
-			.then(res =>
-					this.state.listeJoueurs = res.data.data.request
-			)
-			console.log(this.state.listeJoueurs)
-		}
+	/*Participer a un match*/
+	participer(){
+		console.log("liste des requetes");
+		Axios
+			.get(
+			SERVER_URL + "/matchmaking/participate?token=" + this.state.token
+		)
+		.then(res => {
+			this.state.participer = res.data.data.request;
+    		this.props.history.push(process.env.PUBLIC_URL + "/");
 
-		/*Accepte la request*/
-		acceptRequest(){
-			console.log("AcceptRequest")
-			Axios.get(
-				SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmaking[0] + "&token=" + this.state.token
-			)
-			.then(res => {
-				console.log("res du accept request");
-				console.log(res);
-				this.props.history.push({
-					state :{J1 : res.data.player1,
-									J2 : res.data.player2,
-									token : this.state.token}
-				}
-			);
+		});
+					console.log(this.state.participer)
+	}
+
+	/*Refresh les demandes de parties*/
+	request(){
+		console.log("request")
+		Axios.get(
+			SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.matchmaking[0] +"&token=" + this.state.token
+		)
+		.then(res => {
+			this.state.listeJoueurs = res.data.data.request;
+			this.props.history.push(process.env.PUBLIC_URL + "/");
+		});
+		console.log(this.state.listeJoueurs)
+	}
+
+	/*Accepte la request*/
+	acceptRequest(){
+		console.log("AcceptRequest")
+		Axios.get(
+			SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmaking[0] + "&token=" + this.state.token
+		)
+		.then(res => {
+			console.log("res du accept request");
+			console.log(res);
+			this.props.history.push({
+				state :{J1 : res.data.player1,
+						J2 : res.data.player2,
+						token : this.state.token}
 			})
-		}
+		});
+	}
 
 
     render(){
