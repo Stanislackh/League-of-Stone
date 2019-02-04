@@ -56,7 +56,7 @@ class App extends Component {
             )}
           />
           />
-          <Route path="/board" component={Board}  {...this.state}/>
+          <PrivateRoute path="/board" component={Board}  {...this.state}/>
           <Route path="/signup" component={Signup} />
           <Route path="/regles" component={Regles} />
           <Route path="/card"  component={Card}  />

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./App.css";
 import {Link} from "react-router-dom";
 import axios from "axios";
@@ -13,6 +13,20 @@ class Game extends Component {
             token: this.props.token
         };
         this.deconnexion = this.deconnexion.bind(this);
+        this.accountSupr = this.accountSupr.bind(this);
+    }
+
+    accountSupr(e){
+        e.preventDefault();
+        axios
+            .get(SERVER_URL + "/users/unsubscribe?email=" + this.state.email +
+                "&password=" + this.state.passw
+            ).then(res=>{
+                if (res.data.status === "ok"){
+                    console.log("a");
+                    this.props.history.push(process.env.PUBLIC_URL + "/signin");
+                }
+        } );
     }
 
     deconnexion(e) {
