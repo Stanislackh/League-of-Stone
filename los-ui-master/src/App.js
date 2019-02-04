@@ -10,7 +10,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import Game from "./Game";
 import Regles from "./Regles";
-import Board from "./Board";
+import Board2 from "./Board2";
 import Card from "./Card";
 
 
