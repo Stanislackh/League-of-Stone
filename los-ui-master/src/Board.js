@@ -8,14 +8,14 @@ import logo from "./logo.png";
 import Axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { SERVER_URL } from "./consts";
-
+import Match from "./Match";
 class Board extends Component {
 
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			show : false,
+			show : true,
 			champions: [],
 			cards:[],
 			deck:[],
@@ -131,6 +131,7 @@ class Board extends Component {
 				this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId
 			)}
 			console.log(this.state.matchmaking);
+
 		}
 
 		/*Participer a un match*/
@@ -176,6 +177,66 @@ class Board extends Component {
 			})
 		}
 
+		/* Get Match*/
+		getMatch(){
+	    Axios
+	      .get(
+	      SERVER_URL + "/match/getMatch?token=" + this.state.token
+	    )
+	    .then(res =>
+	      this.state.match = res.status
+	    )
+	    console.log(this.state.match)
+	  }
+
+	/*Pioche une carte*/
+	  pickCard(){
+	    Axios
+	      .get(
+	      SERVER_URL + "/match/pickCard?token=" + this.state.token
+	    )
+	    .then(res =>
+	      this.state.match = res
+	    )
+	  }
+
+	/*Joue une carte*/
+	  playCard(){
+	    Axios
+	    .get(
+	      SERVER_URL + "/match/playCard?card="+ this.state.card.key + "&token=" + this.state.token
+	    )
+	  }
+
+	/*Attaque*/
+	  attack(){
+	    Axios
+	    .get(
+	      SERVER_URL + "/match/attack?card="+ this.state.card.key + "&ennemmyCard=" + this.state.ennemycard.key + "?token=" + this.state.token
+	    )
+	    .then(res=>
+	      this.state.match = res)
+	  }
+
+	/*Attaque directe*/
+	  attackPlayer(){
+	    Axios
+	    .get(
+	      SERVER_URL + "/match/attackPlayer?card="+ this.state.card.key + "&token=" + this.state.token
+	    )
+	    .then(res=>
+	      this.state.match = res)
+	  }
+
+	/*Met fin au tour*/
+	  endTurn(){
+	    Axios
+	    .get(
+	      SERVER_URL + "/match/endTurn"+ this.state.card.key + "&token=" + this.state.token
+	    )
+	    .then(res=>
+	      this.state.match = res)
+	  }
 
     render(){
         return (
@@ -237,9 +298,11 @@ class Board extends Component {
 											<button onClick={()=> this.choix()}>Choix Adversaire</button>
 											<button onClick={()=> this.request()}>Refresh Liste Adversaires</button>
 											<button onClick={()=> this.acceptRequest()}>AcceptRequest</button>
-											<ul>
-											{(this.state.matchmaking || []).map((joueur,index) => (<li key={index}></li>))}
-											</ul>
+											<button onClick={()=> this.getMatch()}>getMatch</button>
+											<button onClick={()=> this.pickCard()}>PickCard</button>
+											<button onClick={()=> this.attack()}>Attack</button>
+											<button onClick={()=> this.attackPlayer()}>AttackPlayer</button>
+											<button onClick={()=> this.endTurn()}>EndTurn</button>
 											</Modal.Body>
 			     					</Modal>
                 </div>
