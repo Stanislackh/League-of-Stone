@@ -1,0 +1,35 @@
+#accueil{
+    margin-left : 50px;
+    margin-top : 20px;
+    width : 300px;
+
+}
+#mdp{
+    margin-top : 30px;
+    text-align : center;
+    width : 300px;
+}
+header{
+    border : solid;
+    border-color : #303036;
+    border-radius : 35px;
+    border-width : 5px;
+    width : 300px;
+}
+h1{
+    margin-left : 10px;
+    margin-top : 10px;
+    margin-right : 10px;
+    text-align : center;
+}
+h3{
+    text-align : center;
+}
+#valider{
+    margin-top:20px;
+    align : center;
+    margin-left:25px;
+}
+#bouton{
+    margin-left:10px;
+}
