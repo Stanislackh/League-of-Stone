@@ -26,7 +26,11 @@ class Board extends Component {
 			requete : [],
 			participer : [],
 			listeJoueurs :[],
-			token: this.props.history.location.test.token
+			player1 : [],
+			player2 : [],
+			token: this.props.history.location.test.token,
+			positions: [{id:10},{id:20},{id:30},{id:40},{id:50}]
+			,
 
 		};
 		this.recupCartes();
@@ -54,7 +58,16 @@ class Board extends Component {
 					console.log("NOK");
 				}
 			});
-		}
+			/*positionne la carte*/
+		}handleCardClicked(event){
+            const destHTMLElement = document.getElementById(10);
+            const rect = destHTMLElement.getBoundingClientRect();
+            event.target.style.position = "absolute";
+            event.target.style.left = rect.left +"px";
+            event.target.style.margin = "0px";
+            event.target.style.top = rect.top +"px";
+            event.target.style.width = rect.width +"px";
+            event.target.style.height = rect.height +"px";}
 
 		/*Pick aléatoire et constitue le deck de 20 cartes*/
 			randomPick(champs) {
@@ -183,10 +196,12 @@ class Board extends Component {
 	      .get(
 	      SERVER_URL + "/match/getMatch?token=" + this.state.token
 	    )
-	    .then(res =>
-	      this.state.match = res.status
-	    )
-	    console.log(this.state.match)
+	    .then(res => {
+				this.state.player1 = res.player1;
+				this.state.player2 = res.player2
+	    });
+	    console.log(this.state.player1);
+			console.log(this.state.player2);
 	  }
 
 	/*Pioche une carte*/
@@ -195,9 +210,9 @@ class Board extends Component {
 	      .get(
 	      SERVER_URL + "/match/pickCard?token=" + this.state.token
 	    )
-	    .then(res =>
+	    .then(res => {
 	      this.state.match = res
-	    )
+	    })
 	  }
 
 	/*Joue une carte*/
@@ -206,6 +221,9 @@ class Board extends Component {
 	    .get(
 	      SERVER_URL + "/match/playCard?card="+ this.state.card.key + "&token=" + this.state.token
 	    )
+			.then(res=> {
+	      this.state.match = res
+			})
 	  }
 
 	/*Attaque*/
@@ -214,8 +232,9 @@ class Board extends Component {
 	    .get(
 	      SERVER_URL + "/match/attack?card="+ this.state.card.key + "&ennemmyCard=" + this.state.ennemycard.key + "?token=" + this.state.token
 	    )
-	    .then(res=>
-	      this.state.match = res)
+	    .then(res => {
+	      this.state.match = res
+			})
 	  }
 
 	/*Attaque directe*/
@@ -224,8 +243,9 @@ class Board extends Component {
 	    .get(
 	      SERVER_URL + "/match/attackPlayer?card="+ this.state.card.key + "&token=" + this.state.token
 	    )
-	    .then(res=>
-	      this.state.match = res)
+	    .then(res => {
+	      this.state.match = res
+			})
 	  }
 
 	/*Met fin au tour*/
@@ -234,8 +254,9 @@ class Board extends Component {
 	    .get(
 	      SERVER_URL + "/match/endTurn"+ this.state.card.key + "&token=" + this.state.token
 	    )
-	    .then(res=>
-	      this.state.match = res)
+	    .then(res => {
+	      this.state.match = res
+			})
 	  }
 
     render(){
@@ -265,15 +286,15 @@ class Board extends Component {
                     <div id="lp">
                     </div>
                     <div id="jeujoueur">
-                        <div className="pose">
+                        <div className="pose" id={this.state.positions[0].id}>
                         </div>
-                        <div className="pose">
+                        <div className="pose" id={this.state.positions[1].id}>
                         </div>
-                        <div className="pose">
+                        <div className="pose" id={this.state.positions[2].id}>
                         </div>
-                        <div className="pose">
+                        <div className="pose" id={this.state.positions[3].id}>
                         </div>
-                        <div className="pose">
+                        <div className="pose" id={this.state.positions[4].id}>
                         </div>
                     </div>
                 </div>
@@ -281,11 +302,11 @@ class Board extends Component {
                     <div id="defjoueur">
                     </div>
                     <div id="cartesjoueur">
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
                     </div>
                     <div id="deckjoueur">
                         <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
