@@ -12,7 +12,6 @@ import Game from "./Game";
 import Regles from "./Regles";
 import Board from "./Board";
 import SuppressAccount from "./SuppressAccount";
-import Card from "./Card";
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (

@@ -5,7 +5,6 @@ import Axios from "axios";
 import {SERVER_URL} from "./consts";
 import "./game.css";
 import logo from "./logo.png";
-import { Modal } from 'react-bootstrap';
 
 class Game extends Component {
     constructor(props) {
@@ -57,7 +56,7 @@ class Game extends Component {
         SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
       )
       .then(res => {
-          this.state.listeJoueurs = res.data.data;
+          this.setState({listeJoueurs: res.data.data});
           this.props.history.push(process.env.PUBLIC_URL + "/");
 
       });
