@@ -23,8 +23,8 @@ class Game extends Component {
             )
             .then(res => {
                 if (res.data.status === "ok") {
-                    this.props.setSessionToken(res.data.token);
-                    this.props.history.push(process.env.PUBLIC_URL + "/signin");
+                    this.props.supSession();
+                    this.props.history.push(process.env.PUBLIC_URL);
                 }
             });
     }

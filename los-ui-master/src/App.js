@@ -38,10 +38,15 @@ class App extends Component {
     };
 
     this.setSessionToken = this.setSessionToken.bind(this);
+    this.supSession = this.supSession.bind(this);
   }
 
   setSessionToken(token) {
     this.setState({ token, isConnected: true });
+  }
+
+  supSession(){
+  	this.setState({ isConnected: false });
   }
 
   render() {
@@ -55,11 +60,11 @@ class App extends Component {
             )}
           />
           />
-          <Route path="/board" component={Board}  {...this.state}/>
+          <PrivateRoute path="/board" component={Board}  {...this.state}/>
           <Route path="/signup" component={Signup} />
           <Route path="/regles" component={Regles} />
           <Route path="/card"  component={Card}  />
-          <PrivateRoute component={Game} {...this.state} />
+          <PrivateRoute component={Game} supSession={this.supSession} {...this.state} />
         </Switch>
       </Router>
     );

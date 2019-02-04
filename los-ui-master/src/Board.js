@@ -26,7 +26,7 @@ class Board extends Component {
 			requete : [],
 			participer : [],
 			listeJoueurs :[],
-			token: this.props.location.test
+			token: this.props.token
 		};
 		this.recupCartes();
 		this.matchGetAll();
@@ -118,8 +118,10 @@ class Board extends Component {
 			SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
 		)
 		.then(res => {
-				this.state.listeJoueurs = res.data.data
-	});
+				this.state.listeJoueurs = res.data.data;
+				this.props.history.push(process.env.PUBLIC_URL + "/");
+
+		});
 		console.log(this.state.listeJoueurs);
 	}
 
@@ -127,8 +129,8 @@ class Board extends Component {
 	choix(){
 		console.log("choix du joueur")
 		for(let i = 0; i < 3; i++){
-			this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId
-		)}
+			this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId)
+		}
 		console.log(this.state.matchmaking);
 	}
 
@@ -140,18 +142,19 @@ class Board extends Component {
 			SERVER_URL + "/matchmaking/participate?token=" + this.state.token
 		)
 		.then(res => {
-			this.state.participer = res.data.data.request;
+			console.log(res.data.data.matchmakingId);
+			this.setState({matchmaking:res.data.data});
     		this.props.history.push(process.env.PUBLIC_URL + "/");
 
 		});
-					console.log(this.state.participer)
+		console.log(this.state.participer)
 	}
 
 	/*Refresh les demandes de parties*/
 	request(){
 		console.log("request")
 		Axios.get(
-			SERVER_URL + "/matchmaking/request?matchmakingId= " + this.state.matchmaking[0] +"&token=" + this.state.token
+			SERVER_URL + "/matchmaking/request?matchmakingId=" + this.state.listeJoueurs[0].matchmakingId +"&token=" + this.state.token
 		)
 		.then(res => {
 			this.state.listeJoueurs = res.data.data.request;
@@ -164,7 +167,7 @@ class Board extends Component {
 	acceptRequest(){
 		console.log("AcceptRequest")
 		Axios.get(
-			SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmaking[0] + "&token=" + this.state.token
+			SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmakingId + "&token=" + this.state.token
 		)
 		.then(res => {
 			console.log("res du accept request");
@@ -231,17 +234,15 @@ class Board extends Component {
                         <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
                     </div>
 
-										<Modal show={this.state.show = true}>
+									<Modal show={this.state.show = true}>
 			        				<Modal.Body>
 											<button onClick={()=> this.matchGetAll()}>Liste Participants</button>
 											<button onClick={()=> this.participer()}>Participer</button>
 											<button onClick={()=> this.choix()}>Choix Adversaire</button>
 											<button onClick={()=> this.request()}>Refresh Liste Adversaires</button>
 											<button onClick={()=> this.acceptRequest()}>AcceptRequest</button>
-											<ul>
-											{(this.state.matchmaking || []).map((joueur,index) => (<li key={index}></li>))}
-											</ul>
-											</Modal.Body>
+											
+									</Modal.Body>
 			     					</Modal>
                 </div>
             </div>
