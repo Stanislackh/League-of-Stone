@@ -29,18 +29,6 @@ class Game extends Component {
             });
     }
 
-    render() {
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h2>League of Stones</h2>
-                    <p>Bienvenue</p>
-                    <Link to="/signin" onClick={this.deconnexion}>Deconnexion</Link>
-                </header>
-            </div>
-        );
-    }
   render() {
     return (
       <div id="accueil">
@@ -49,7 +37,7 @@ class Game extends Component {
         </header>
         <div id="milieu">
             <div id="pla">
-              <Link to={{pathname:"Board", test:{...this.state}}}>< input className="bla" type="submit" value="Jouer!" /></Link>
+              <Link to={{pathname:"Board", test:{...this.state}}}><input className="bla" type="submit" value="Jouer!" /></Link>
               <Link to="Signin" onClick={this.deconnexion}><input className="bla" type="submit" value="Deconnexion" /></Link>
               <input className="bla" type="button" value="Supprimer compte" />
               <Link to="Regles" test={this.state.token}><input className="bla" type="submit" value="Règles du jeu" /></Link>
