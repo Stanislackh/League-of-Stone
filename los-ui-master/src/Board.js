@@ -15,11 +15,8 @@ class Board extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
-			show: false,
-			token: this.props.token
-
 			show : true,
+			token: this.props.token,
 			champions: [],
 			cards:[],
 			deck:[],
@@ -36,8 +33,6 @@ class Board extends Component {
 			,
 
 		};
-		this.recupCartes();
-		this.matchGetAll();
 	}
 
 	allowDrop(ev) {
@@ -53,6 +48,8 @@ class Board extends Component {
 		var data = ev.dataTransfer.getData("image/svg+xml");
 		ev.target.appendChild(document.getElementByClassName(data));
 	}
+
+	/* Récupération des donnée pour les cartes*/
 	recupCartes() {
 		console.log("RecupCarte");
 		Axios
@@ -137,7 +134,6 @@ class Board extends Component {
 
 		/*Pick aléatoire et constitue le deck de 20 cartes*/
 			randomPick(champs) {
-				console.log("random");
 
 				for (let i = 0; i < 20; i++) {
 					let rand = Math.floor((Math.random() * 133) + 1);
@@ -147,7 +143,6 @@ class Board extends Component {
 					)
 				}
 				console.log(this.state.cards);
-					console.log("SUPERRANDOM");
 				// for(let i = 0; i < 20; i++){
 				// 	 //let rand = Math.floor((Math.random() * 133) + 1);
 				// 	 	this.state.deck
@@ -160,24 +155,8 @@ class Board extends Component {
 
 	}
 
-	randomPick(champs, number) {
-		let rChamps = [];
-		for (let i = 0; i < number; i++) {
-			let elem = champs.splice(Math.floor(Math.random() * champs.length), 1)[0];
-			rChamps.push({
-				"id": elem.key,
-				"name": elem.name,
-				"img": elem.key + "_0.jpg",
-				"attack": elem.info.attack,
-				"defense": elem.info.defense
-			});
-		}
-	}
-
-
 	/*Pick aléatoire et constitue le deck de 20 cartes*/
-	randomPick(champs) {
-		console.log("random");
+	/*randomPick() {
 
 		for (let i = 0; i < 134; i++) {
 			this.state.cards
@@ -185,8 +164,6 @@ class Board extends Component {
 					this.state.champions[i]
 				)
 		}
-		console.log(this.state.cards);
-		console.log("SUPERRANDOM");
 		for (let i = 0; i < 20; i++) {
 			let rand = Math.floor((Math.random() * 133) + 1);
 			this.state.deck
@@ -195,16 +172,12 @@ class Board extends Component {
 				)
 		}
 		this.state.deck.pop();
-
 		this.setState(
 			this.state.finaldeck = {deck: this.state.deck}
 		);
-
-		console.log(this.state.finaldeck)
-	}
+	}*/
 
 	creerCarte() {
-		console.log("creerCarte");
 		for (let i = 0; i < this.state.finaldeck.lenght(); i++) {
 			this.state.cartes.push(
 				<Card id={this.state.finaldeck[i].id}
@@ -213,7 +186,6 @@ class Board extends Component {
 					  attack={this.state.finaldeck[i].info.attack}
 					  defense={this.state.finaldeck[i].info.defense}
 					  key={i}
-
 				/>)
 		}
 
@@ -221,8 +193,6 @@ class Board extends Component {
 
 	/*tente de créer un deck*/
 	deckcards(deck) {
-		console.log("deckinit");
-		console.log(this.state.finaldeck.deck);
 		var jsondeck = JSON.stringify(this.state.finaldeck.deck);
 		Axios.get(
 			SERVER_URL + "/match/initDeck?deck=" + jsondeck + "&token=" + this.state.token
@@ -234,62 +204,48 @@ class Board extends Component {
 
 	/*Recupe les matchs*/ /*FONCTIONNE YOUPI*/
 	matchGetAll() {
-		console.log("MatchGetAll")
 		Axios.get(
 			SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
 		)
 			.then(res => {
 				this.state.listeJoueurs = res.data.data
 			});
-		console.log(this.state.listeJoueurs);
 	}
 
 	/*Choisir a qui envoyer la requete*/
 	choix() {
-		console.log("choix du joueur")
 		for (let i = 0; i < 3; i++) {
 			this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId
-			)
-
-		}
-		console.log(this.state.matchmaking);
+			)}
 	}
 
 	/*Participer a un match*/
 	participer() {
-		console.log("liste des requetes");
 		Axios
 			.get(
 				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
 			)
 			.then(res => {
 				this.state.matchmakingId = res.data.data.matchmakingId;
-				console.log(this.state.matchmakingId);
 			});
-		console.log(this.state.participer)
 	}
 
 	/*Refresh les demandes de parties*/
 	request() {
-		console.log("request");
 		Axios.get(
 			SERVER_URL + "/matchmaking/request?matchmakingId=" + this.state.matchmakingId + "&token=" + this.state.token
 		)
 			.then(res =>
 				this.state.listeJoueurs = res.data.data.request
 			);
-		console.log(this.state.listeJoueurs)
 	}
 
 	/*Accepte la request*/
 	acceptRequest() {
-		console.log("AcceptRequest");
 		Axios.get(
 			SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmakingId + "&token=" + this.state.token
 		)
 			.then(res => {
-				console.log("res du accept request");
-				console.log(res);
 				this.props.history.push({
 						state: {
 							J1: res.data.player1,
@@ -300,7 +256,6 @@ class Board extends Component {
 				);
 
 			})
-
 	  }
 
 	/*Attaque directe*/
@@ -383,8 +338,8 @@ class Board extends Component {
 											<button onClick={()=> this.matchGetAll()}>Liste Participants</button>
 											<button onClick={()=> this.participer()}>Participer</button>
 											<button onClick={()=> this.choix()}>Choix Adversaire</button>
-											<button onClick={()=> this.request()}>Refresh Liste Adversaires</button>
-											<button onClick={()=> this.acceptRequest()}>AcceptRequest</button>
+											<button onClick={()=> this.request()}>Request</button>
+											<button onClick={()=> this.acceptRequest()}>Accept Request</button>
 											<button onClick={()=> this.getMatch()}>getMatch</button>
 											<button onClick={()=> this.pickCard()}>PickCard</button>
 											<button onClick={()=> this.attack()}>Attack</button>
@@ -397,7 +352,7 @@ class Board extends Component {
         );
     }
 
-	}
+
 
 	initMatch(){
 		Axios.get(
@@ -407,21 +362,7 @@ class Board extends Component {
 		});
 
 	}
+
 }
-
-
-function allowDrop(ev) {
-    ev.preventDefault();
-  }
-
-function drag(ev) {
-    ev.dataTransfer.setData("image/svg+xml", ev.target.class);
-  }
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("image/svg+xml");
-    ev.target.appendChild(document.getElementByClassName(data));
-  }
 
 export default Board;
