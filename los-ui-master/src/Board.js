@@ -8,25 +8,32 @@ import logo from "./logo.png";
 import Axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { SERVER_URL } from "./consts";
-
+import Match from "./Match";
 class Board extends Component {
 
 
 	constructor(props) {
 		super(props);
 		this.state = {
+
 			show: false,
-			champions: [],
-			cards: [],
-			deck: [],
-			finaldeck: [],
-			deckserv: [],
-			cartes: [],
-			matchmaking: "",
-			requete: [],
-			participer: [],
-			listeJoueurs: [],
 			token: this.props.token
+
+			show : true,
+			champions: [],
+			cards:[],
+			deck:[],
+			finaldeck : [],
+			deckserv : [],
+			cartes : [],
+			matchmaking : [],
+			requete : [],
+			participer : [],
+			listeJoueurs :[],
+			player1 : [],
+			player2 : [],
+			positions: [{id:10},{id:20},{id:30},{id:40},{id:50}]
+			,
 
 		};
 		this.recupCartes();
@@ -65,6 +72,7 @@ class Board extends Component {
 					console.log("NOK");
 				}
 			});
+
 	}
 	render(){
 		return (
@@ -151,6 +159,7 @@ class Board extends Component {
 		}
 	}
 
+
 	/*Pick aléatoire et constitue le deck de 20 cartes*/
 	randomPick(champs) {
 		console.log("random");
@@ -226,6 +235,7 @@ class Board extends Component {
 		for (let i = 0; i < 3; i++) {
 			this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId
 			)
+
 		}
 		console.log(this.state.matchmaking);
 	}
@@ -283,6 +293,7 @@ class Board extends Component {
 		).then(res=> {
 
 		});
+
 	}
 }
 
