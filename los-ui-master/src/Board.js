@@ -58,36 +58,88 @@ class Board extends Component {
 					console.log("NOK");
 				}
 			});
-			/*positionne la carte*/
-		}handleCardClicked(event){
-            const destHTMLElement = document.getElementById(10);
-            const rect = destHTMLElement.getBoundingClientRect();
-            event.target.style.position = "absolute";
-            event.target.style.left = rect.left +"px";
-            event.target.style.margin = "0px";
-            event.target.style.top = rect.top +"px";
-            event.target.style.width = rect.width +"px";
-            event.target.style.height = rect.height +"px";}
+		}
+
+		/*positionne la carte emplacement 1*/
+	handleCardClicked1(event){
+					const destHTMLElement = document.getElementById(10);
+					const rect = destHTMLElement.getBoundingClientRect();
+					event.target.style.position = "absolute";
+					event.target.style.left = rect.left +"px";
+					event.target.style.margin = "0px";
+					event.target.style.top = rect.top +"px";
+					event.target.style.width = rect.width +"px";
+					event.target.style.height = rect.height +"px";
+				}
+
+				/*positionne la carte emplacement 2*/
+			handleCardClicked2(event){
+							const destHTMLElement = document.getElementById(20);
+							const rect = destHTMLElement.getBoundingClientRect();
+							event.target.style.position = "absolute";
+							event.target.style.left = rect.left +"px";
+							event.target.style.margin = "0px";
+							event.target.style.top = rect.top +"px";
+							event.target.style.width = rect.width +"px";
+							event.target.style.height = rect.height +"px";
+						}
+
+						/*positionne la carte emplacement 3*/
+					handleCardClicked3(event){
+									const destHTMLElement = document.getElementById(30);
+									const rect = destHTMLElement.getBoundingClientRect();
+									event.target.style.position = "absolute";
+									event.target.style.left = rect.left +"px";
+									event.target.style.margin = "0px";
+									event.target.style.top = rect.top +"px";
+									event.target.style.width = rect.width +"px";
+									event.target.style.height = rect.height +"px";
+								}
+
+								/*positionne la carte emplacement 4*/
+							handleCardClicked4(event){
+											const destHTMLElement = document.getElementById(40);
+											const rect = destHTMLElement.getBoundingClientRect();
+											event.target.style.position = "absolute";
+											event.target.style.left = rect.left +"px";
+											event.target.style.margin = "0px";
+											event.target.style.top = rect.top +"px";
+											event.target.style.width = rect.width +"px";
+											event.target.style.height = rect.height +"px";
+										}
+
+										/*positionne la carte emplacement 5*/
+									handleCardClicked5(event){
+													const destHTMLElement = document.getElementById(50);
+													const rect = destHTMLElement.getBoundingClientRect();
+													event.target.style.position = "absolute";
+													event.target.style.left = rect.left +"px";
+													event.target.style.margin = "0px";
+													event.target.style.top = rect.top +"px";
+													event.target.style.width = rect.width +"px";
+													event.target.style.height = rect.height +"px";
+												}
 
 		/*Pick aléatoire et constitue le deck de 20 cartes*/
 			randomPick(champs) {
 				console.log("random");
 
-				for (let i = 0; i < 134; i++) {
+				for (let i = 0; i < 20; i++) {
+					let rand = Math.floor((Math.random() * 133) + 1);
 					this.state.cards
 					.push(
-						this.state.champions[i]
+						this.state.champions[rand]
 					)
 				}
 				console.log(this.state.cards);
 					console.log("SUPERRANDOM");
-				for(let i = 0; i < 20; i++){
-					 let rand = Math.floor((Math.random() * 133) + 1);
-					 	this.state.deck
-						.push(
-						 this.state.deck[i] = {key : this.state.cards[rand].key}
-						)
-					}
+				// for(let i = 0; i < 20; i++){
+				// 	 //let rand = Math.floor((Math.random() * 133) + 1);
+				// 	 	this.state.deck
+				// 		.push(
+				// 		 this.state.deck[i] = {key : this.state.cards[i].key}
+				// 		)
+				// 	}
 					this.state.deck.pop();
 
 					this.setState(
@@ -281,20 +333,20 @@ class Board extends Component {
                         <div className="pose">
                         </div>
                         <div className="pose">
-                        </div>
+                      </div>
                     </div>
-                    <div id="lp">
+                    	<div id="lp">
                     </div>
                     <div id="jeujoueur">
-                        <div className="pose" id={this.state.positions[0].id}>
+                        <div id={this.state.positions[0].id} className="pose">
                         </div>
-                        <div className="pose" id={this.state.positions[1].id}>
+                        <div id={this.state.positions[1].id} className="pose">
                         </div>
-                        <div className="pose" id={this.state.positions[2].id}>
+                        <div id={this.state.positions[2].id} className="pose">
                         </div>
-                        <div className="pose" id={this.state.positions[3].id}>
+                        <div id={this.state.positions[3].id} className="pose">
                         </div>
-                        <div className="pose" id={this.state.positions[4].id}>
+                        <div id={this.state.positions[4].id} className="pose">
                         </div>
                     </div>
                 </div>
@@ -302,11 +354,11 @@ class Board extends Component {
                     <div id="defjoueur">
                     </div>
                     <div id="cartesjoueur">
-										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" onClick={this.handleCardClicked} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked1} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked2} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked3} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked4} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" onClick={this.handleCardClicked5} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
                     </div>
                     <div id="deckjoueur">
                         <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
