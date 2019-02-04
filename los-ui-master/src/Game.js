@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./App.css";
 import {Link} from "react-router-dom";
 import Axios from "axios";
@@ -20,6 +20,20 @@ class Game extends Component {
         this.matchGetAll();
         this.deconnexion = this.deconnexion.bind(this);
         this.handleShow = this.handleShow.bind(this);
+        this.accountSupr = this.accountSupr.bind(this);
+    }
+
+    accountSupr(e){
+        e.preventDefault();
+        Axios
+            .get(SERVER_URL + "/users/unsubscribe?email=" + this.state.email +
+                "&password=" + this.state.passw
+            ).then(res=>{
+                if (res.data.status === "ok"){
+                    this.props.history.push(process.env.PUBLIC_URL + "/signin");
+                }
+        } );
+
     }
 
     deconnexion(e) {
@@ -145,7 +159,6 @@ class Game extends Component {
               <Link to="Signin" onClick={this.deconnexion}><input className="bla" type="submit" value="Deconnexion" /></Link>
               <Link to={{pathname:"SuppressAccount", state:{...this.state}}} ><input className="bla" type="submit" value="Supprimer compte" /></Link>
               <Link to="Regles" test={this.state.token}><input className="bla" type="submit" value="Règles du jeu" /></Link>
-              
               
                 <div id="ModalF"
                   style={{ 

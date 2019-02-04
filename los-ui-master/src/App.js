@@ -11,9 +11,9 @@ import Signup from "./Signup";
 import Game from "./Game";
 import Regles from "./Regles";
 import Board from "./Board";
+import SuppressAccount from "./SuppressAccount";
 import Card from "./Card";
 import SuppressAccount from "./SuppressAccount";
-
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -61,11 +61,10 @@ class App extends Component {
           />
           />
           <PrivateRoute path="/board" component={Board}  {...this.state}/>
-          <Route path="/signup" component={Signup} />
-          <Route path="/regles" component={Regles} />
-          <Route path="/card"  component={Card}  />
-          <Route path="/SuppressAccount" component={SuppressAccount} {...this.state} />
-          <PrivateRoute component={Game} supSession={this.supSession} {...this.state} />
+          <PrivateRoute path="/signup" component={Signup} {...this.state}/>
+          <PrivateRoute path="/regles" component={Regles} {...this.state}/>
+          <PrivateRoute path="/SuppressAccount" component={SuppressAccount} {...this.state} />
+          <PrivateRoute component={Game} {...this.state} setSessionToken={this.setDisconnect} />
         </Switch>
       </Router>
     );
