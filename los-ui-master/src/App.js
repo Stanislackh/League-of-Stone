@@ -13,7 +13,6 @@ import Regles from "./Regles";
 import Board from "./Board";
 import SuppressAccount from "./SuppressAccount";
 import Card from "./Card";
-import SuppressAccount from "./SuppressAccount";
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -61,7 +60,7 @@ class App extends Component {
           />
           />
           <PrivateRoute path="/board" component={Board}  {...this.state}/>
-          <PrivateRoute path="/signup" component={Signup} {...this.state}/>
+          <Route path="/signup" component={Signup} />
           <PrivateRoute path="/regles" component={Regles} {...this.state}/>
           <PrivateRoute path="/SuppressAccount" component={SuppressAccount} {...this.state} />
           <PrivateRoute component={Game} {...this.state} setSessionToken={this.setDisconnect} />

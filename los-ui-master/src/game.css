@@ -146,10 +146,9 @@ h3{
 }
 #cartesadv{
     display:inline-block;
-    margin-left:25px;
+    margin-left:70px;
     width:400px;
     height:120px;
-    border:solid;
     }
 #adversaire{
     margin-right: 15px;
@@ -175,20 +174,21 @@ h3{
 
 }
 #deckadv{
-    background-image: url("https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg");
+    /* background-image: url("https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg");
     background-size: cover;
     height:120px;
-    width:100px;
+    width:100px; */
     display:inline-block;
     margin-left:8px;
 
 }
 #cartesjoueur{
     display:inline-block;
-    margin-left:25px;
+    margin-left:50px;
     width:400px;
     height:120px;
     }
+
 #defjoueur{
     border:solid;
     height:120px;
@@ -236,9 +236,7 @@ h3{
 }
 #lp{
     height:20px;
-    margin-left:200px;
-    margin-right:200px;
-    border:solid;
+    margin-left:290px;
 }
 .card {
 	display: inline-block;
@@ -247,13 +245,37 @@ h3{
 	width: 65px;
 	height: 100px;
 }
+
 #cartesjoueur .card + .card {
 	margin-left: -10px;
 }
-#cartesjoueur .card {
-	float: left;
-	margin-left: 30px;
+
+#cartesadv .card + .card {
+	margin-left: -10px;
 }
-#cartesjoueur .card:hover {
-	/*margin-top: -50px;*/
+
+.bout {
+  color : #db3333;
+  border-color:#dd2e2e;
+  border-radius : 5px;
+  margin-right: 10px;
+  height : 30px;
+  width : auto;
+}
+
+.bout:hover{
+  background-color : #db3333;
+  color : white;
+}
+
+#fin{
+  color : #db3333;
+  border-color:#dd2e2e;
+  border-radius : 5px;
+  margin-right: 10px;
+}
+
+#fin:hover {
+  background-color : #db3333;
+  color : white;
 }

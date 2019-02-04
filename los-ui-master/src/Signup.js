@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "./logo.png";
 import { SERVER_URL } from "./consts";
 import "./signup.css";
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -102,7 +103,7 @@ class Signup extends Component {
           <div id="val">
             <input id="bien" type="submit" value="S'inscrire" />
             <Link to="/signin"><input id="bout" type="submit" value="Se connecter" /></Link>
-          </div>      
+          </div>
         </form>
       </div>
     );

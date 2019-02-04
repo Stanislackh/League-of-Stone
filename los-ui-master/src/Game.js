@@ -77,7 +77,7 @@ class Game extends Component {
           this.props.history.push(process.env.PUBLIC_URL + "/");
 
       });
-  
+
     }
 
     unparticipate(){
@@ -156,12 +156,12 @@ class Game extends Component {
             <div id="pla">
               <button className="bla" onClick={()=> this.jouer()}>Participer</button>
               <Link to={{pathname:"Board", test:{...this.state}}}><input className="bla" type="submit" value="Jouer!" /></Link>
-              <Link to="Signin" onClick={this.deconnexion}><input className="bla" type="submit" value="Deconnexion" /></Link>
+              <Link to="Signin" onClick={()=> this.deconnexion}><input className="bla" type="submit" value="Deconnexion" /></Link>
               <Link to={{pathname:"SuppressAccount", state:{...this.state}}} ><input className="bla" type="submit" value="Supprimer compte" /></Link>
               <Link to="Regles" test={this.state.token}><input className="bla" type="submit" value="Règles du jeu" /></Link>
-              
+
                 <div id="ModalF"
-                  style={{ 
+                  style={{
                     position: 'absolute',
                     top: '0',
                     bottom: '0',
@@ -180,14 +180,14 @@ class Game extends Component {
                     justifySelf: 'center'
                   }}
                 >
-              
-                <button className="bla" onClick={()=> this.handleShow()}>Abandonner demande</button>       
-                <button className="bla" onClick={()=> this.acceptRequest()}>AcceptRequest</button> 
-             
+
+                <button className="bla" onClick={()=> this.handleShow()}>Abandonner demande</button>
+                <button className="bla" onClick={()=> this.acceptRequest()}>AcceptRequest</button>
+
                 </div>
             </div>
           </div>
-        </body>  
+        </body>
       </div>
     );
   }

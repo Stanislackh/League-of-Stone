@@ -296,8 +296,13 @@ class Board extends Component {
         <div id="page">
                 <div id="adversaire" >
                     <div id="deckadv" >
+											<img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
                     </div>
                     <div id="cartesadv">
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
+										<img class="card" src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
                     </div>
                     <div id="defadv">
                     </div>
@@ -315,8 +320,9 @@ class Board extends Component {
                         <div className="pose">
                       </div>
                     </div>
-                    	<div id="lp">
-                    </div>
+	                    <div id="lp">
+												<button id="fin" onClick={()=> this.endTurn()}>EndTurn</button>
+	                    </div>
                     <div id="jeujoueur">
                         <div id={this.state.positions[0].id} className="pose">
                         </div>
@@ -338,7 +344,6 @@ class Board extends Component {
 										<img class="card" onClick={this.handleCardClicked2} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" onClick={this.handleCardClicked3} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
 										<img class="card" onClick={this.handleCardClicked4} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
-										<img class="card" onClick={this.handleCardClicked5} src="http://decaf.kouhi.me/lovelive/images/5/55/Kotori_pure_r39_t.jpg"/>
                     </div>
                     <div id="deckjoueur">
                         <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
@@ -346,16 +351,15 @@ class Board extends Component {
 
 									<Modal show={this.state.show = true}>
 			        				<Modal.Body>
-											<button onClick={()=> this.matchGetAll()}>Liste Participants</button>
-											<button onClick={()=> this.participer()}>Participer</button>
-											<button onClick={()=> this.choix()}>Choix Adversaire</button>
-											<button onClick={()=> this.request()}>Request</button>
-											<button onClick={()=> this.acceptRequest()}>Accept Request</button>
-											<button onClick={()=> this.getMatch()}>getMatch</button>
-											<button onClick={()=> this.pickCard()}>PickCard</button>
-											<button onClick={()=> this.attack()}>Attack</button>
-											<button onClick={()=> this.attackPlayer()}>AttackPlayer</button>
-											<button onClick={()=> this.endTurn()}>EndTurn</button>
+											<button className="bout" onClick={()=> this.matchGetAll()}>Liste Participants</button>
+											<button className="bout" onClick={()=> this.participer()}>Participer</button>
+											<button className="bout" onClick={()=> this.choix()}>Choix Adversaire</button>
+											<button className="bout" onClick={()=> this.request()}>Request</button>
+											<button className="bout" onClick={()=> this.acceptRequest()}>Accept Request</button>
+											<button className="bout" onClick={()=> this.getMatch()}>getMatch</button>
+											<button className="bout" onClick={()=> this.pickCard()}>PickCard</button>
+											<button className="bout" onClick={()=> this.attack()}>Attack</button>
+											<button className="bout" onClick={()=> this.attackPlayer()}>AttackPlayer</button>
 											</Modal.Body>
 			     					</Modal>
                 </div>
