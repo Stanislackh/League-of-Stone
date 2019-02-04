@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import Axios from "axios";
 import "./signin.css";
 import { SERVER_URL } from "./consts";
 
@@ -22,7 +22,7 @@ class Signin extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios
+    Axios
       .get(
         SERVER_URL +
           "/users/connect?email=" +

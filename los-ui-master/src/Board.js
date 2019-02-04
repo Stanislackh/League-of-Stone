@@ -22,10 +22,6 @@ class Board extends Component {
 			finaldeck : [],
 			deckserv : [],
 			cartes : [],
-			matchmaking : [],
-			requete : [],
-			participer : [],
-			listeJoueurs :[],
 			token: this.props.token
 		};
 		this.recupCartes();
@@ -157,7 +153,6 @@ class Board extends Component {
 			SERVER_URL + "/matchmaking/request?matchmakingId=" + this.state.listeJoueurs[0].matchmakingId +"&token=" + this.state.token
 		)
 		.then(res => {
-			this.state.listeJoueurs = res.data.data.request;
 			this.props.history.push(process.env.PUBLIC_URL + "/");
 		});
 		console.log(this.state.listeJoueurs)
@@ -167,7 +162,7 @@ class Board extends Component {
 	acceptRequest(){
 		console.log("AcceptRequest")
 		Axios.get(
-			SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmakingId + "&token=" + this.state.token
+			SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.listeJoueurs[0].matchmakingId + "&token=" + this.state.token
 		)
 		.then(res => {
 			console.log("res du accept request");

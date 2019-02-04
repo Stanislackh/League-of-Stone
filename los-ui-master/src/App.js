@@ -12,7 +12,7 @@ import Game from "./Game";
 import Regles from "./Regles";
 import Board from "./Board";
 import Card from "./Card";
-
+import SuppressAccount from "./SuppressAccount";
 
 import "./App.css";
 
@@ -64,6 +64,7 @@ class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/regles" component={Regles} />
           <Route path="/card"  component={Card}  />
+          <Route path="/SuppressAccount" component={SuppressAccount} {...this.state} />
           <PrivateRoute component={Game} supSession={this.supSession} {...this.state} />
         </Switch>
       </Router>
