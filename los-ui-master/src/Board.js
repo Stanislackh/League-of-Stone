@@ -3,11 +3,9 @@ import Card from "./Card";
 import "./Card.css";
 import "./App.css";
 import "./game.css";
-import logo from "./logo.png";
 import Axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { SERVER_URL } from "./consts";
-import Match from "./Match";
 class Board extends Component {
 
 
@@ -204,7 +202,7 @@ class Board extends Component {
 			SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
 		)
 		.then(res => {
-			this.state.listeJoueurs = res.data.data;
+			this.setState({listeJoueurs: res.data.data});
 			this.props.history.push(process.env.PUBLIC_URL + "/");
 		});
 		console.log(this.state.listeJoueurs);
