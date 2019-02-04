@@ -10,6 +10,7 @@
     "jquery": "^3.3.1",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
+    "local-storage": "^1.4.2",
     "react": "^16.7.0",
     "react-cookie": "^3.0.8",
     "react-dom": "^16.7.0",

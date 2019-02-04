@@ -31,7 +31,6 @@ class Board extends Component {
 			player2 : [],
 			positions: [{id:10},{id:20},{id:30},{id:40},{id:50}]
 			,
-
 		};
 	}
 
@@ -199,64 +198,76 @@ class Board extends Component {
 		)
 			.then(res => {
 				console.log(res.data);
-			});
+		});
 	}
 
 	/*Recupe les matchs*/ /*FONCTIONNE YOUPI*/
-	matchGetAll() {
+	matchGetAll(){
+		console.log("MatchGetAll")
 		Axios.get(
 			SERVER_URL + "/matchmaking/getAll?token=" + this.state.token
 		)
-			.then(res => {
-				this.state.listeJoueurs = res.data.data
-			});
+		.then(res => {
+				this.state.listeJoueurs = res.data.data;
+				this.props.history.push(process.env.PUBLIC_URL + "/");
+
+		});
+		console.log(this.state.listeJoueurs);
 	}
 
 	/*Choisir a qui envoyer la requete*/
-	choix() {
-		for (let i = 0; i < 3; i++) {
-			this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId
-			)}
+	choix(){
+		console.log("choix du joueur")
+		for(let i = 0; i < 3; i++){
+			this.state.matchmaking.push(this.state.listeJoueurs[i].matchmakingId)
+		}
+		console.log(this.state.matchmaking);
 	}
 
 	/*Participer a un match*/
-	participer() {
+	participer(){
+		console.log("liste des requetes");
 		Axios
 			.get(
-				SERVER_URL + "/matchmaking/participate?token=" + this.state.token
-			)
-			.then(res => {
-				this.state.matchmakingId = res.data.data.matchmakingId;
-			});
+			SERVER_URL + "/matchmaking/participate?token=" + this.state.token
+		)
+		.then(res => {
+			console.log(res.data.data.matchmakingId);
+			this.setState({matchmaking:res.data.data});
+    		this.props.history.push(process.env.PUBLIC_URL + "/");
+
+		});
+		console.log(this.state.participer)
 	}
 
 	/*Refresh les demandes de parties*/
-	request() {
+	request(){
+		console.log("request")
 		Axios.get(
-			SERVER_URL + "/matchmaking/request?matchmakingId=" + this.state.matchmakingId + "&token=" + this.state.token
+			SERVER_URL + "/matchmaking/request?matchmakingId=" + this.state.listeJoueurs[0].matchmakingId +"&token=" + this.state.token
 		)
-			.then(res =>
-				this.state.listeJoueurs = res.data.data.request
-			);
+		.then(res => {
+			this.props.history.push(process.env.PUBLIC_URL + "/");
+		});
+		console.log(this.state.listeJoueurs)
 	}
 
 	/*Accepte la request*/
-	acceptRequest() {
+	acceptRequest(){
+		console.log("AcceptRequest")
 		Axios.get(
-			SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.matchmakingId + "&token=" + this.state.token
+			SERVER_URL + "/matchmaking/acceptRequest?matchmakingId=" + this.state.listeJoueurs[0].matchmakingId + "&token=" + this.state.token
 		)
-			.then(res => {
-				this.props.history.push({
-						state: {
-							J1: res.data.player1,
-							J2: res.data.player2,
-							token: this.state.token
-						}
-					}
-				);
-
+		.then(res => {
+			console.log("res du accept request");
+			console.log(res);
+			this.props.history.push({
+				state :{J1 : res.data.player1,
+						J2 : res.data.player2,
+						token : this.state.token}
 			})
-	  }
+		});
+	}
 
 	/*Attaque directe*/
 	  attackPlayer(){
@@ -333,7 +344,7 @@ class Board extends Component {
                         <img class="card" src="https://decaf.kouhi.me/lovelive/images/b/b8/Umi_cool_r287_t.jpg"/>
                     </div>
 
-										<Modal show={this.state.show = true}>
+									<Modal show={this.state.show = true}>
 			        				<Modal.Body>
 											<button onClick={()=> this.matchGetAll()}>Liste Participants</button>
 											<button onClick={()=> this.participer()}>Participer</button>

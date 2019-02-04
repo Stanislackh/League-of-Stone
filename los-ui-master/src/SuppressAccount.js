@@ -7,7 +7,6 @@ import logo from "./logo.png";
 import { Link } from "react-router-dom";
 import App from "./App";
 
-
 class SuppressAccount extends Component {
 
     constructor(props) {
@@ -78,5 +77,4 @@ class SuppressAccount extends Component {
         );
     }
 }
-
 export default SuppressAccount;

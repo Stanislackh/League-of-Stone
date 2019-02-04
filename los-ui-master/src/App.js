@@ -13,8 +13,7 @@ import Regles from "./Regles";
 import Board from "./Board";
 import SuppressAccount from "./SuppressAccount";
 import Card from "./Card";
-
-
+import SuppressAccount from "./SuppressAccount";
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -39,10 +38,15 @@ class App extends Component {
     };
 
     this.setSessionToken = this.setSessionToken.bind(this);
+    this.supSession = this.supSession.bind(this);
   }
 
   setSessionToken(token) {
     this.setState({ token, isConnected: true });
+  }
+
+  supSession(){
+  	this.setState({ isConnected: false });
   }
 
   render() {

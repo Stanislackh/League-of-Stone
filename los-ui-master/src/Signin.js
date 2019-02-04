@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import Axios from "axios";
 import "./signin.css";
 import { SERVER_URL } from "./consts";
 
@@ -21,7 +21,7 @@ class Signin extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios
+    Axios
       .get(
         SERVER_URL +
           "/users/connect?email=" +
@@ -49,7 +49,7 @@ class Signin extends Component {
       <div id="accueil">
       <header>
         <h1>League of Stones</h1>
-      < h3>Version UT2J</h3>
+      <h3>Version UT2J</h3>
       </header>
       <div>
         <form onSubmit={this.handleSubmit}>
