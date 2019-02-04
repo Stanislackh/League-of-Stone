@@ -36,7 +36,7 @@ class Board2 extends Component {
             val2:0,
             val3:0,
             val4:0,
-            
+
 		};
     }
     handleCardClicked(event){
@@ -64,10 +64,10 @@ class Board2 extends Component {
         }
 }*/
     render(){
-        return (                   
+        return (
         <div id="page">
                 <div id="plateau">
-                                      
+
                     <div id="jeujoueur">
 
                         <div className="pose" id={this.state.positions[0].id}>
@@ -83,7 +83,7 @@ class Board2 extends Component {
                     </div>
                 </div>
                 <div id="joueur">
-                    <div id="defjoueur">                        
+                    <div id="defjoueur">
                     </div>
                     <div id="cartesjoueur">
 		                <img id={this.state.cartes[0].id}  onClick={this.handleCardClicked} className="card" src={chat}/>
