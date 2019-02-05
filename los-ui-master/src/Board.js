@@ -263,6 +263,18 @@ class Board extends Component {
 		});
 	}
 
+	/*Attaque*/
+	attack(){
+		Axios
+		.get(
+		  SERVER_URL + "/match/attack?card="+ this.state.card.key + "&ennemmyCard=" + this.state.ennemycard.key + "?token=" + this.state.token
+		)
+		.then(res=> {
+		    this.setState({match: res});
+		  }
+		)
+	}
+	
 	/*Attaque directe*/
   	attackPlayer(){
 	    Axios
@@ -344,16 +356,16 @@ class Board extends Component {
 
 				<Modal show={this.state.show = true}>
 				<Modal.Body>
-						<button className="bout" onClick={()=> this.matchGetAll()}>Liste Participants</button>
-						<button className="bout" onClick={()=> this.participer()}>Participer</button>
-						<button className="bout" onClick={()=> this.request()}>Request</button>
-						<button className="bout" onClick={()=> this.acceptRequest()}>Accept Request</button>
-						<button className="bout" onClick={()=> this.getMatch()}>getMatch</button>
-						<button className="bout" onClick={()=> this.pickCard()}>PickCard</button>
-						<button className="bout" onClick={()=> this.attack()}>Attack</button>
-						<button className="bout" onClick={()=> this.attackPlayer()}>AttackPlayer</button>
-						</Modal.Body>
-					</Modal>
+					<button className="bout" onClick={()=> this.matchGetAll()}>Liste Participants</button>
+					<button className="bout" onClick={()=> this.participer()}>Participer</button>
+					<button className="bout" onClick={()=> this.request()}>Request</button>
+					<button className="bout" onClick={()=> this.acceptRequest()}>Accept Request</button>
+					<button className="bout" onClick={()=> this.getMatch()}>getMatch</button>
+					<button className="bout" onClick={()=> this.pickCard()}>PickCard</button>
+					<button className="bout" onClick={()=> this.attack()}>Attack</button>
+					<button className="bout" onClick={()=> this.attackPlayer()}>AttackPlayer</button>
+					</Modal.Body>
+				</Modal>
             </div>
         </div>
         );
