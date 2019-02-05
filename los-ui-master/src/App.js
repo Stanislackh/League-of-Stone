@@ -9,7 +9,9 @@ import {
 import Signin from "./Signin";
 import Signup from "./Signup";
 import Game from "./Game";
-
+import Regles from "./Regles";
+import Board from "./Board";
+import SuppressAccount from "./SuppressAccount";
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -17,7 +19,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={props => {
       return rest.isConnected ? (
-        <Component {...props} />
+        <Component {...rest} />
       ) : (
         <Redirect to="/signin" />
       );
@@ -34,10 +36,15 @@ class App extends Component {
     };
 
     this.setSessionToken = this.setSessionToken.bind(this);
+    this.supSession = this.supSession.bind(this);
   }
 
   setSessionToken(token) {
     this.setState({ token, isConnected: true });
+  }
+
+  supSession(){
+  	this.setState({ isConnected: false });
   }
 
   render() {
@@ -51,8 +58,11 @@ class App extends Component {
             )}
           />
           />
+          <PrivateRoute path="/board" component={Board}  {...this.state}/>
           <Route path="/signup" component={Signup} />
-          <PrivateRoute component={Game} isConnected={this.state.isConnected} />
+          <PrivateRoute path="/regles" component={Regles} {...this.state}/>
+          <PrivateRoute path="/SuppressAccount" component={SuppressAccount} {...this.state} />
+          <PrivateRoute component={Game} {...this.state} setSessionToken={this.setDisconnect} />
         </Switch>
       </Router>
     );
